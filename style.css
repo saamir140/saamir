@@ -2,3 +2,177 @@
 @media(max-width:850px){.wrap{width:88%}.nav{gap:17px}.hero{gap:4%}.hero-visual{height:370px}.float-card{padding:8px;font-size:7px}.section{padding-top:85px;padding-bottom:85px}.cycle-section{gap:5%}.trust-card{padding:32px;gap:6%}}
 @media(max-width:650px){.topline{font-size:7px}.topline-right{display:none}.header{height:70px;padding:0 6%}.logo{font-size:21px}.menu-btn{display:flex;background:none;border:1px solid var(--line);height:38px;width:40px;flex-direction:column;justify-content:center;align-items:center;gap:5px}.menu-btn i{width:16px;height:1px;background:#f4f5ed}.nav{display:none;position:absolute;top:70px;left:0;right:0;background:#0d110d;border-bottom:1px solid var(--line);padding:22px 6%;flex-direction:column;align-items:stretch}.nav.open{display:flex}.nav .nav-cta{text-align:center}.hero{display:flex;flex-direction:column;align-items:stretch;padding-top:65px;padding-bottom:76px;gap:42px}.hero h1{font-size:clamp(43px,12vw,61px)}.hero-lead{font-size:13px}.hero-ctas{align-items:flex-start;flex-direction:column;gap:20px}.hero-note{margin-top:36px}.hero-visual{height:330px}.ring-a{width:220px;height:220px}.ring-b{width:295px;height:295px}.float-card{font-size:6px;padding:7px}.hero-bottom{font-size:6px;gap:10px}.hero-bottom span{max-width:65%}.section{padding-top:72px;padding-bottom:72px}.friction-grid,.section-top,.cycle-section,.trust-card,.about,.contact-inner{grid-template-columns:1fr;display:grid;gap:25px}.friction h2,.section-top h2,.cycle-intro h2{font-size:43px}.friction-copy p{font-size:12px}.pain-points,.offer-grid,.cap-grid,.work-grid{grid-template-columns:1fr}.pain-points{gap:10px;margin-top:32px}.pain-points article{min-height:0}.pain-points h3{margin:20px 0 8px}.statement{padding:60px 0}.statement h2{font-size:clamp(44px,12vw,68px)}.statement-bottom{flex-direction:column;gap:10px}.section-top{align-items:start;margin-bottom:30px}.section-top>p{font-size:11px}.offer-card{padding:25px}.offer-card h3{font-size:32px}.offer-desc{min-height:0}.cap-grid article{min-height:0}.cycle-section{gap:38px}.cycle-timeline article{grid-template-columns:34px 1fr auto;gap:11px}.cycle-timeline article h3{font-size:14px}.cycle-timeline article p{font-size:9px}.cycle-timeline article>span{font-size:8px}.renewal{margin-left:44px;padding:13px}.cycle-disclaimer{grid-column:1;margin:0}.work-image{height:205px}.trust-card{padding:25px}.trust-card h2{font-size:42px}.testimonial-empty{align-items:flex-start;flex-wrap:wrap;padding:20px;gap:12px}.testimonial-empty>span{margin-left:48px}.about-photo{height:340px}.about-copy h2{font-size:39px}.faq-list summary{font-size:11px;gap:15px}.contact-section{padding:72px 0}.contact-copy h2{font-size:48px}.contact-form{padding:20px}.footer{align-items:flex-start;flex-direction:column;gap:16px;padding:28px 6%}.footer>div{width:100%;justify-content:space-between}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
+
+/* V4 — typography, hierarchy and spacing refinement */
+:root{
+  --font:'DM Sans',sans-serif;
+  --display:'Manrope',sans-serif;
+}
+body{font-size:16px;line-height:1.65;letter-spacing:0}
+.wrap{width:min(1180px,86%)}
+.header{height:88px;padding-inline:7%}
+.logo{font-size:27px}
+.logo small{font-size:9px;letter-spacing:.18em}
+.nav{gap:36px}
+.nav>a{font-size:13px;font-weight:600}
+.nav .nav-cta{padding:14px 18px}
+.topline{height:36px;font-size:10px;letter-spacing:.13em}
+.hero{min-height:700px;padding-top:112px;padding-bottom:100px;gap:7%}
+.eyebrow{font-size:11px;letter-spacing:.14em;line-height:1.5}
+h1{font-size:clamp(56px,6.1vw,84px);line-height:1.02;letter-spacing:-.07em;margin:25px 0 25px}
+.hero-lead{font-size:18px;line-height:1.75;max-width:570px;color:#c0c6bb}
+.btn{font-size:13px;padding:17px 22px;gap:24px}
+.link-arrow{font-size:13px}
+.hero-ctas{gap:30px;margin-top:38px}
+.hero-note{margin-top:58px;padding-top:23px}
+.hero-note strong{font-size:14px}
+.hero-note small{font-size:12px;line-height:1.6}
+.hero-visual{height:455px}
+.visual-head,.visual-foot{font-size:10px;letter-spacing:.12em}
+.float-card{font-size:10px;padding:12px 15px}
+.core-center span{font-size:10px}
+.core-center b{font-size:28px}
+.hero-bottom{font-size:10px;letter-spacing:.1em}
+.section{padding-top:124px;padding-bottom:124px}
+.friction-grid{gap:10%;margin-top:36px}
+.friction h2,.section-top h2,.cycle-intro h2,.trust-card h2,.contact-copy h2{font-size:clamp(44px,4.8vw,66px);line-height:1.08;letter-spacing:-.06em}
+.friction-copy p{font-size:16px;line-height:1.8;color:#b7beb2;margin-bottom:18px}
+.friction-copy strong{font-size:15px;line-height:1.7}
+.pain-points{gap:18px;margin-top:64px}
+.pain-points article{padding:30px;min-height:210px}
+.pain-points article>span{font-size:10px}
+.pain-points h3{font-size:20px;margin:32px 0 12px}
+.pain-points p{font-size:14px;line-height:1.75}
+.statement{padding:88px 0}
+.statement h2{font-size:clamp(56px,7vw,96px);line-height:1.02;margin:30px 0 42px}
+.statement-bottom{font-size:10px;letter-spacing:.1em;gap:20px}
+.section-top{gap:65px;margin-bottom:55px}
+.section-top h2{margin-top:22px}
+.section-top>p{font-size:15px;line-height:1.8;max-width:410px}
+.offer-grid{gap:22px}
+.offer-card{padding:42px}
+.offer-meta{font-size:10px}
+.offer-icon{font-size:28px}
+.offer-tag{font-size:10px;margin-top:40px;padding:8px 11px}
+.offer-card h3{font-size:clamp(32px,3.3vw,44px);line-height:1.12;margin:20px 0}
+.offer-desc{font-size:15px;line-height:1.75;min-height:78px}
+.offer-includes{margin-top:28px;padding-top:24px}
+.offer-includes>strong{font-size:10px;letter-spacing:.12em}
+.offer-includes ul{gap:13px;margin:17px 0 30px}
+.offer-includes li{font-size:14px;line-height:1.6;gap:12px}
+.offer-link{font-size:14px;padding:18px 0}
+.offer-footnote{font-size:11px;line-height:1.7}
+.scope-note{padding:22px 25px;margin-top:22px}
+.scope-note p{font-size:13px;line-height:1.75}
+.capability-heading{margin-bottom:42px}
+.cap-grid article{padding:32px;min-height:245px}
+.cap-grid article>span{font-size:11px}
+.cap-symbol{font-size:29px;margin:28px 0 17px}
+.cap-grid h3{font-size:19px;margin-bottom:12px}
+.cap-grid p{font-size:14px;line-height:1.75}
+.cycle-section{gap:10%}
+.cycle-intro h2{margin:27px 0 24px}
+.cycle-intro>p{font-size:15px;line-height:1.8;margin-bottom:32px}
+.cycle-timeline article{grid-template-columns:38px 1fr auto;gap:20px;padding-bottom:34px}
+.cycle-timeline article>b{width:36px;height:36px;font-size:12px}
+.cycle-timeline article small{font-size:10px;letter-spacing:.12em}
+.cycle-timeline article h3{font-size:20px;margin:8px 0}
+.cycle-timeline article p{font-size:14px;line-height:1.7;max-width:430px}
+.cycle-timeline article>span{font-size:11px}
+.renewal{padding:20px;margin-left:58px}
+.renewal>span{font-size:10px}
+.renewal strong{font-size:14px}
+.renewal p{font-size:12px;line-height:1.6}
+.cycle-disclaimer{font-size:12px;line-height:1.7}
+.work-caption{padding:23px}
+.work-caption small{font-size:9px}
+.work-caption h3{font-size:17px;margin:10px 0}
+.work-caption p{font-size:13px;line-height:1.7}
+.work-honesty>span{font-size:10px}
+.work-honesty p{font-size:12px;line-height:1.7}
+.trust-card{padding:58px;gap:9%}
+.trust-points{gap:22px}
+.trust-points>p{gap:20px;padding-bottom:19px}
+.trust-points b{font-size:12px}
+.trust-points strong{font-size:15px}
+.trust-points small{font-size:13px;line-height:1.65;margin-top:6px}
+.testimonial-empty{padding:34px;gap:26px}
+.testimonial-empty strong{font-size:19px}
+.testimonial-empty p{font-size:13px;line-height:1.75;margin-top:9px}
+.testimonial-empty>span{font-size:9px}
+.about{gap:10%}
+.about-photo{height:480px}
+.photo-placeholder small{font-size:9px}
+.photo-caption{font-size:9px}
+.about-copy h2{font-size:clamp(40px,4.3vw,58px);line-height:1.1;margin:27px 0}
+.about-copy>p{font-size:15px;line-height:1.8;margin-bottom:17px}
+.about-signoff{font-size:32px}
+.faq-list{max-width:900px}
+.faq-list details{padding:25px 0}
+.faq-list summary{font-size:16px;line-height:1.5;gap:20px}
+.faq-list summary b{font-size:23px}
+.faq-list details p{font-size:14px;line-height:1.8;margin-top:16px}
+.contact-section{padding:118px 0}
+.contact-inner{gap:10%}
+.contact-copy h2{font-size:clamp(48px,5.2vw,70px);line-height:1.06;margin:27px 0 24px}
+.contact-copy>p{font-size:16px;line-height:1.8;max-width:470px}
+.contact-assurance{font-size:12px;line-height:1.6;margin-top:34px}
+.contact-form{padding:34px;gap:19px}
+.contact-form label{font-size:12px;gap:9px}
+.contact-form input,.contact-form select,.contact-form textarea{padding:15px;font-size:14px}
+.form-note{font-size:11px;line-height:1.7}
+.footer{min-height:120px;padding:30px 7%}
+.footer>p{font-size:12px}
+.footer>div{font-size:11px}
+
+@media(max-width:850px){
+  .wrap{width:88%}.header{padding-inline:6%}.nav{gap:18px}
+  .hero{gap:5%;padding-top:90px}.hero-visual{height:390px}
+  .section{padding-top:96px;padding-bottom:96px}
+  .offer-card{padding:30px}.trust-card{padding:36px}
+}
+@media(max-width:650px){
+  body{font-size:15px}.wrap{width:88%}
+  .topline{height:32px;font-size:8px;letter-spacing:.1em}
+  .header{height:72px;padding-inline:6%}.logo{font-size:23px}.logo small{font-size:8px}
+  .nav{top:72px;gap:20px;padding:24px 6%}.nav>a{font-size:14px}
+  .hero{padding-top:68px;padding-bottom:82px;gap:36px}
+  h1,.hero h1{font-size:clamp(43px,11.8vw,62px);line-height:1.04;margin:22px 0}
+  .eyebrow{font-size:9px;letter-spacing:.12em}
+  .hero-lead{font-size:16px;line-height:1.75}
+  .hero-ctas{margin-top:30px;gap:20px}.btn{font-size:13px;padding:16px 19px}
+  .hero-note{margin-top:38px;padding-top:18px}.hero-note strong{font-size:13px}.hero-note small{font-size:11px}
+  .hero-visual{height:325px}.visual-head,.visual-foot{font-size:8px}.float-card{font-size:7px;padding:8px 9px}
+  .hero-bottom{font-size:7px;line-height:1.5;bottom:20px}
+  .section{padding-top:78px;padding-bottom:78px}
+  .friction-grid,.section-top,.cycle-section,.trust-card,.about,.contact-inner{gap:24px}
+  .friction h2,.section-top h2,.cycle-intro h2,.trust-card h2{font-size:clamp(38px,10vw,48px);line-height:1.08}
+  .friction-copy p{font-size:14px;line-height:1.75}.friction-copy strong{font-size:14px}
+  .pain-points{gap:11px;margin-top:34px}.pain-points article{padding:23px;min-height:0}
+  .pain-points article>span{font-size:9px}.pain-points h3{font-size:18px;margin:20px 0 9px}.pain-points p{font-size:13px;line-height:1.7}
+  .statement{padding:65px 0}.statement h2{font-size:clamp(43px,11.5vw,66px);line-height:1.02;margin:24px 0 32px}
+  .statement-bottom{font-size:8px;gap:9px}
+  .section-top{margin-bottom:34px}.section-top>p{font-size:14px;line-height:1.75}
+  .offer-grid,.cap-grid,.work-grid,.pain-points{grid-template-columns:1fr}
+  .offer-card{padding:25px}.offer-meta{font-size:9px}.offer-tag{font-size:9px;margin-top:29px}
+  .offer-card h3{font-size:31px;line-height:1.12}.offer-desc{font-size:14px;line-height:1.7;min-height:0}
+  .offer-includes{margin-top:22px;padding-top:19px}.offer-includes>strong{font-size:9px}
+  .offer-includes ul{gap:11px;margin:14px 0 23px}.offer-includes li{font-size:13px;line-height:1.55}
+  .offer-link{font-size:13px;padding:16px 0}.offer-footnote{font-size:10px}
+  .scope-note{padding:17px;margin-top:14px}.scope-note p{font-size:12px;line-height:1.7}
+  .capability-heading{margin-bottom:30px}.cap-grid article{padding:25px;min-height:0}
+  .cap-grid article>span{font-size:10px}.cap-symbol{font-size:25px;margin:20px 0 12px}.cap-grid h3{font-size:17px}.cap-grid p{font-size:13px;line-height:1.7}
+  .cycle-section{gap:35px}.cycle-intro h2{font-size:40px}.cycle-intro>p{font-size:14px;line-height:1.75}
+  .cycle-timeline article{grid-template-columns:34px 1fr auto;gap:11px;padding-bottom:27px}.cycle-timeline article>b{width:32px;height:32px;font-size:11px}
+  .cycle-timeline article small{font-size:8px}.cycle-timeline article h3{font-size:16px;margin:6px 0}.cycle-timeline article p{font-size:12px;line-height:1.65}.cycle-timeline article>span{font-size:8px}
+  .renewal{margin-left:44px;padding:14px}.renewal>span{font-size:8px}.renewal strong{font-size:12px}.renewal p{font-size:10px}
+  .cycle-disclaimer{font-size:10px;line-height:1.65}
+  .work-caption{padding:18px}.work-caption small{font-size:8px}.work-caption h3{font-size:15px}.work-caption p{font-size:12px}
+  .trust-card{padding:25px}.trust-points{gap:17px}.trust-points strong{font-size:13px}.trust-points small{font-size:11px}
+  .testimonial-empty{padding:20px;gap:12px}.testimonial-empty strong{font-size:16px}.testimonial-empty p{font-size:12px}.testimonial-empty>span{font-size:8px;margin-left:45px}
+  .about-photo{height:340px}.about-copy h2{font-size:38px;margin:22px 0}.about-copy>p{font-size:14px;line-height:1.75}
+  .faq-list details{padding:19px 0}.faq-list summary{font-size:14px;line-height:1.5}.faq-list details p{font-size:12px;line-height:1.75;margin:12px 28px 0 0}
+  .contact-section{padding:78px 0}.contact-copy h2{font-size:46px;line-height:1.06;margin:22px 0 18px}.contact-copy>p{font-size:14px;line-height:1.75}
+  .contact-assurance{font-size:11px;margin-top:22px}.contact-form{padding:21px;gap:15px}.contact-form label{font-size:11px}.contact-form input,.contact-form select,.contact-form textarea{padding:13px;font-size:13px}.form-note{font-size:10px}
+  .footer{padding:26px 6%;gap:13px}.footer>p{font-size:11px}.footer>div{font-size:10px}
+}
