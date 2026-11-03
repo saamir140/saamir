@@ -547,3 +547,65 @@ p{overflow-wrap:break-word}
  .contact-copy>p{line-height:1.8}.contact-form{padding:24px;gap:17px}
  .footer{padding-top:28px;padding-bottom:28px}
 }
+
+/* V11 — a little more breathing room */
+.section {
+  padding-top: clamp(116px, 10vw, 150px);
+  padding-bottom: clamp(116px, 10vw, 150px);
+}
+.section-top { margin-bottom: 68px; }
+.section-top h2 { margin-bottom: 22px; }
+.section-top > p { margin-top: 22px; }
+.friction-grid { margin-top: 52px; }
+.pain-points { margin-top: 78px; gap: 24px; }
+.pain-points article { padding: 40px; }
+.offer-grid { gap: 30px; }
+.offer-card { padding: 48px; }
+.offer-card h3 { margin-top: 28px; margin-bottom: 26px; }
+.offer-includes { margin-top: 36px; padding-top: 30px; }
+.offer-includes ul { gap: 18px; margin-top: 24px; }
+.capability-heading { margin-bottom: 62px; }
+.cap-grid { gap: 26px; }
+.cap-grid article { padding: 44px; }
+.cap-grid h3 { margin-top: 32px; margin-bottom: 18px; }
+.cycle-section { gap: 14%; }
+.cycle-timeline article { padding-bottom: 44px; gap: 26px; }
+.work-grid, .story-grid, .process-grid { gap: 28px; }
+.work-caption { padding: 36px; }
+.faq-list details { padding: 34px 0; }
+.contact-section { padding-top: 148px; padding-bottom: 148px; }
+.contact-form { padding: 48px; gap: 27px; }
+
+@media (max-width: 850px) {
+  .section { padding-top: 98px; padding-bottom: 98px; }
+  .section-top { margin-bottom: 46px; }
+  .pain-points { margin-top: 48px; }
+  .offer-card { padding: 36px; }
+  .cap-grid article { padding: 32px; }
+  .contact-section { padding-top: 104px; padding-bottom: 104px; }
+}
+@media (max-width: 650px) {
+  .section { padding-top: 86px; padding-bottom: 86px; }
+  .section-top { margin-bottom: 42px; }
+  .section-top h2 { margin-bottom: 16px; }
+  .section-top > p { margin-top: 16px; }
+  .friction-grid { margin-top: 38px; }
+  .pain-points { margin-top: 46px; gap: 17px; }
+  .pain-points article { padding: 28px; }
+  .offer-grid { gap: 20px; }
+  .offer-card { padding: 30px; }
+  .offer-card h3 { margin-top: 24px; margin-bottom: 22px; }
+  .offer-includes { margin-top: 28px; padding-top: 24px; }
+  .offer-includes ul { gap: 15px; margin-top: 20px; }
+  .capability-heading { margin-bottom: 38px; }
+  .cap-grid { gap: 16px; }
+  .cap-grid article { padding: 28px; }
+  .cap-grid h3 { margin-top: 23px; margin-bottom: 13px; }
+  .cycle-section { gap: 40px; }
+  .cycle-timeline article { padding-bottom: 32px; gap: 16px; }
+  .work-grid, .story-grid, .process-grid { gap: 20px; }
+  .work-caption { padding: 25px; }
+  .faq-list details { padding: 25px 0; }
+  .contact-section { padding-top: 92px; padding-bottom: 92px; }
+  .contact-form { padding: 28px; gap: 21px; }
+}
