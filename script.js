@@ -1,38 +1,149 @@
-const menuButton = document.querySelector('.menu-btn');
-const nav = document.querySelector('.nav');
-if (menuButton && nav) {
-  menuButton.addEventListener('click', () => {
-    const open = nav.classList.toggle('open');
-    menuButton.setAttribute('aria-expanded', String(open));
-    menuButton.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-  });
-  nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
-    nav.classList.remove('open');
-    menuButton.setAttribute('aria-expanded', 'false');
-  }));
-}
-const year = document.getElementById('year');
-if (year) year.textContent = new Date().getFullYear();
-const form = document.getElementById('enquiryForm');
-if (form) form.addEventListener('submit', event => {
-  event.preventDefault();
-  const data = new FormData(form);
-  const recipient = 'YOUR_EMAIL_ADDRESS'; // Replace with the real business email before publishing.
-  const subject = encodeURIComponent('E-commerce enquiry — ' + data.get('interest'));
-  const body = encodeURIComponent(
-    `Name: ${data.get('name')}\nEmail: ${data.get('email')}\nService: ${data.get('interest')}\nBusiness stage: ${data.get('stage')}\nWebsite: ${data.get('website') || 'Not provided'}\nMain priority: ${data.get('challenge') || 'Not specified'}\n\nBusiness details:\n${data.get('message') || 'Not provided'}`
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Mobile navigation
+  const menuToggle = document.querySelector(
+    ".menu-toggle, .nav-toggle, #menuToggle"
   );
-  const note = document.getElementById('formNote');
-  if (recipient === 'YOUR_EMAIL_ADDRESS') {
-    note.textContent = 'The enquiry form is ready, but the business email has not been connected yet. Add your real email in script.js before publishing.';
-    return;
+
+  const navigation = document.querySelector(
+    ".nav-links, .nav-menu, #navMenu"
+  );
+
+  if (menuToggle && navigation) {
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navigation.classList.toggle("active");
+
+      menuToggle.classList.toggle("active", isOpen);
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    // Close menu after clicking a navigation link
+    navigation.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navigation.classList.remove("active");
+        menuToggle.classList.remove("active");
+        menuToggle.setAttribute("aria-expanded", "false");
+      });
+    });
   }
-  window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+
+  // Smooth scrolling for internal links
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const targetId = link.getAttribute("href");
+
+      if (!targetId || targetId === "#") return;
+
+      const target = document.querySelector(targetId);
+
+      if (target) {
+        event.preventDefault();
+
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    });
+  });
+
+  // FAQ accordion
+  const faqItems = document.querySelectorAll(
+    ".faq-item, .accordion-item"
+  );
+
+  faqItems.forEach((item) => {
+    const trigger = item.querySelector(
+      ".faq-question, .accordion-header, button"
+    );
+
+    if (!trigger) return;
+
+    trigger.addEventListener("click", () => {
+      const isOpen = item.classList.contains("active");
+
+      // Close other FAQ items
+      faqItems.forEach((otherItem) => {
+        otherItem.classList.remove("active");
+
+        const otherTrigger = otherItem.querySelector(
+          ".faq-question, .accordion-header, button"
+        );
+
+        if (otherTrigger) {
+          otherTrigger.setAttribute("aria-expanded", "false");
+        }
+      });
+
+      // Toggle selected item
+      if (!isOpen) {
+        item.classList.add("active");
+        trigger.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+
+  // Footer dynamic year
+  const yearElement = document.querySelector(
+    "#currentYear, .current-year"
+  );
+
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+  }
+
+  // Scroll reveal animation
+  const revealElements = document.querySelectorAll(
+    ".reveal, .fade-up"
+  );
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries, currentObserver) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            currentObserver.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.12,
+      }
+    );
+
+    revealElements.forEach((element) => {
+      observer.observe(element);
+    });
+  } else {
+    revealElements.forEach((element) => {
+      element.classList.add("visible");
+    });
+  }
+
+  // Prevent empty contact form submission
+  const contactForm = document.querySelector(
+    "#contactForm, .contact-form"
+  );
+
+  if (contactForm) {
+    contactForm.addEventListener("submit", (event) => {
+      const requiredFields = contactForm.querySelectorAll(
+        "[required]"
+      );
+
+      let isValid = true;
+
+      requiredFields.forEach((field) => {
+        if (!field.value.trim()) {
+          isValid = false;
+          field.focus();
+        }
+      });
+
+      if (!isValid) {
+        event.preventDefault();
+      }
+    });
+  }
 });
-document.querySelectorAll('[data-interest]').forEach(link => link.addEventListener('click', () => {
-  const select = document.querySelector('select[name="interest"]');
-  if (!select) return;
-  const value = link.dataset.interest;
-  const option = [...select.options].find(item => item.text.toLowerCase().includes(value.toLowerCase().slice(0, 12)));
-  if (option) select.value = option.value;
-}));
