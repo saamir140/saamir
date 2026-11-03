@@ -237,3 +237,28 @@ h1{font-size:clamp(58px,6.2vw,88px);line-height:1.02;letter-spacing:-.075em;marg
  .about-photo{height:330px}.about-copy h2{font-size:37px;margin:20px 0}.about-copy>p{font-size:14px;line-height:1.7}.faq-list details{padding:18px 0}.faq-list summary{font-size:14px;line-height:1.45}.faq-list details p{font-size:12px;line-height:1.7;margin:11px 25px 0 0}
  .contact-section{padding:72px 0}.contact-copy h2{font-size:44px;line-height:1.05;margin:20px 0 16px}.contact-copy>p{font-size:14px;line-height:1.7}.contact-assurance{font-size:11px;margin-top:20px}.contact-form{padding:20px;gap:14px}.contact-form label{font-size:11px}.contact-form input,.contact-form select,.contact-form textarea{padding:13px;font-size:13px}.form-note{font-size:10px}.footer{padding:24px 6%;gap:12px}.footer>p{font-size:11px}.footer>div{font-size:10px}
 }
+
+/* V6 — stronger qualification, fit and enquiry sections */
+.fit-section{padding-top:35px}
+.fit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.fit-card{position:relative;min-height:285px;padding:30px;background:#111611;border:1px solid rgba(255,255,255,.13);display:flex;flex-direction:column;align-items:flex-start}
+.fit-number{font-size:11px;letter-spacing:.12em;color:var(--gold)}
+.fit-icon{font-size:30px;color:var(--green);margin:24px 0 15px}
+.fit-card h3{font-size:22px;line-height:1.2;letter-spacing:-.035em;margin:0 0 12px}
+.fit-card p{font-size:14px;line-height:1.7;color:#b9c0b5;margin:0 0 22px}
+.fit-card a{margin-top:auto;color:var(--green);font-size:13px;font-weight:700;text-decoration:none;border-bottom:1px solid rgba(196,255,77,.4);padding-bottom:8px}
+.client-ready{background:#101510}
+.client-ready-inner{display:grid;grid-template-columns:.85fr 1.15fr;gap:10%;align-items:start}
+.client-ready h2{font-size:clamp(42px,4.5vw,64px);line-height:1.06;letter-spacing:-.06em;margin:20px 0}
+.client-ready h2 em{font-style:normal;color:var(--gold)}
+.client-ready-inner>div:first-child>p{font-size:16px;line-height:1.75;color:#bdc5b9;max-width:390px}
+.ready-list{border-top:1px solid var(--line)}
+.ready-list article{display:grid;grid-template-columns:38px 1fr;gap:18px;padding:22px 0;border-bottom:1px solid var(--line)}
+.ready-list article>b{color:var(--green);font-size:12px;padding-top:3px}
+.ready-list strong{font-size:16px;line-height:1.4}
+.ready-list p{font-size:14px;line-height:1.7;color:#b9c0b5;margin:6px 0 0}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.contact-form .optional{font-size:11px;color:#9ca596;font-weight:400}
+.contact-form input:focus,.contact-form select:focus,.contact-form textarea:focus{outline:2px solid var(--green);outline-offset:2px;border-color:var(--green)}
+@media(max-width:800px){.fit-grid{grid-template-columns:1fr}.fit-card{min-height:0}.client-ready-inner{grid-template-columns:1fr;gap:35px}}
+@media(max-width:600px){.fit-section{padding-top:15px}.fit-card{padding:23px}.fit-icon{margin:16px 0 10px}.fit-card h3{font-size:20px}.client-ready-inner>div:first-child>p{font-size:14px}.ready-list article{gap:12px;padding:18px 0}.ready-list strong{font-size:14px}.ready-list p{font-size:13px}.form-row{grid-template-columns:1fr;gap:14px}}

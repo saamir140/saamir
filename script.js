@@ -18,11 +18,13 @@ if (form) form.addEventListener('submit', event => {
   event.preventDefault();
   const data = new FormData(form);
   const recipient = 'YOUR_EMAIL_ADDRESS'; // Replace with the real business email before publishing.
-  const subject = encodeURIComponent('E-commerce business enquiry — ' + data.get('interest'));
-  const body = encodeURIComponent(`Name: ${data.get('name')}\nEmail: ${data.get('email')}\nInterested in: ${data.get('interest')}\n\nBusiness details:\n${data.get('message')}`);
+  const subject = encodeURIComponent('E-commerce enquiry — ' + data.get('interest'));
+  const body = encodeURIComponent(
+    `Name: ${data.get('name')}\nEmail: ${data.get('email')}\nService: ${data.get('interest')}\nBusiness stage: ${data.get('stage')}\nWebsite: ${data.get('website') || 'Not provided'}\nMain priority: ${data.get('challenge') || 'Not specified'}\n\nBusiness details:\n${data.get('message') || 'Not provided'}`
+  );
   const note = document.getElementById('formNote');
   if (recipient === 'YOUR_EMAIL_ADDRESS') {
-    note.textContent = 'Form layout is ready. Add your real business email in script.js before publishing so enquiries can be delivered.';
+    note.textContent = 'The enquiry form is ready, but the business email has not been connected yet. Add your real email in script.js before publishing.';
     return;
   }
   window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
