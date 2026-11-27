@@ -1,3 +1,4 @@
+export const sprintFee = "$500 USD";
 export const method = [
   [
     "Research",
@@ -69,7 +70,7 @@ export const phases = [
 export const faqs = [
   [
     "How much does the sprint cost?",
-    "Investment is scoped after a diagnostic call. You receive a written quote covering deliverables, responsibilities and exclusions before committing. Applying is free. The scope and fee for any deeper audit are agreed separately.",
+    `The consulting fee is ${sprintFee} for the full 45-day sprint. We agree on implementation priorities before kickoff. Media spend, paid tools and outside production are separate. Applying is free.`,
   ],
   [
     "Is advertising spend included?",
