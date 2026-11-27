@@ -1,5 +1,6 @@
 import { mkdir, writeFile, cp, rm } from "node:fs/promises";
 import {
+  sprintFee,
   method,
   phases,
   faqs,
@@ -22,49 +23,42 @@ const cta = (place = "section") =>
 const mark =
   '<span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>';
 const brand = `<a class="brand" aria-label="Samir Liaquat home" href="/">${mark}Samir Liaquat<span>.</span></a>`;
-const nav = `<header id="nav"><div class="wrap nav">${brand}<button class="toggle" aria-expanded="false" aria-controls="links">Menu</button><nav id="links" aria-label="Main navigation"><a href="/#work">Work</a><a href="/#method">Method</a><a href="/#sprint">45-Day Sprint</a><a href="/about">About</a><a href="/#faq">FAQs</a>${cta("navigation")}</nav></div></header>`;
+const nav = `<header id="nav"><div class="wrap nav">${brand}<button class="toggle" aria-expanded="false" aria-controls="links">Menu</button><nav id="links" aria-label="Main navigation"><a href="/about">About Samir</a><a href="/#problems">Approach</a><a href="/#sprint">45-Day Sprint</a><a href="/#work">Client work</a>${cta("navigation")}</nav></div></header>`;
 const footer = `<footer><div class="wrap foot">${brand}<span>© ${new Date().getUTCFullYear()} Samir Liaquat</span><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/apply">Contact</a></div></footer>`;
 const label = (s) => `<div class="label"><b></b>${s}</div>`;
 const lead = (tag, title, desc = "") =>
   `${label(tag)}<h2>${title}</h2>${desc ? `<p class="intro">${desc}</p>` : ""}`;
 const section = (id, cls, content) =>
   `<section class="block ${cls}" id="${id}"><div class="wrap">${content}</div></section>`;
-const icons = [
-  '<path d="M3 4h18l-7 8v6l-4 2v-8z"/>',
-  '<path d="M3 20h18M5 16l5-6 4 3 6-9M15 4h5v5"/>',
-  '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><path d="M7 14v4h4M14 7h4v4"/>',
-];
-const icon = (i) =>
-  `<span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">${icons[i]}</svg></span>`;
-const hero = `<section class="hero" id="home"><div class="wrap hero-grid"><div class="herocopy">${label("Independent ecommerce growth strategist")}<h1>Don’t Guess.<br><em>Diagnose.</em></h1><p>I’m Samir Liaquat. I help ecommerce founders find what’s holding growth back, then build and execute a focused <strong>45-day growth plan.</strong></p><div class="actions">${cta("hero")}<a class="textlink" href="#sprint">Explore the 45-Day Plan</a></div></div><figure><img src="/assets/diagnosis.webp" width="1100" height="1375" fetchpriority="high" alt="A strategy notebook with a hand-annotated ecommerce funnel"></figure></div></section>
-<div id="trust"><div class="wrap strip">${["Direct strategist access", "Decisions backed by testing", "Client-owned accounts"].map((x) => `<span><b aria-hidden="true">✓</b>${x}</span>`).join("")}</div></div>`;
+const hero = `<section id="home" class="advisory-intro"><div class="wrap intro-layout"><div>${label("Independent ecommerce consultant")}<h1>I’m Samir Liaquat.</h1><p class="position">I help founders find what’s holding their store back.</p><p class="description">I audit the customer journey, prioritize the highest-impact changes and work directly with you to test them over 45 days.</p><div class="actions"><a class="button" href="#offer" data-place="hero">See the $500 sprint</a><a class="textlink" href="/about">About Samir</a></div></div><figure><img src="/assets/consulting-desk.webp" width="1000" height="700" alt="A strategist’s workspace with a hand-drawn ecommerce funnel" fetchpriority="high"></figure></div></section>`;
 const pain = section(
   "problems",
-  "",
-  lead(
-    "Growth diagnosis",
-    "Where growth gets stuck.",
-    "More traffic alone won’t fix a disconnected growth system. Start with the constraint that matters.",
-  ) +
-    `<div class="grid three">${[
+  "home-band",
+  lead("Problem & approach", "What’s slowing your store down?") +
+    `<div class="diagnostic-grid">${[
       [
-        "Visitors arrive, then leave",
-        "Unclear offers, unanswered objections and checkout friction can lose buyers who were ready to act.",
+        "diagnose",
+        "Traffic arrives. Buyers leave.",
+        "I trace the buying journey to find the objection or checkout step costing you orders.",
       ],
       [
-        "Spend grows faster than insight",
-        "Clicks tell only part of the story. Weak tracking makes it hard to see which campaigns attract buyers.",
+        "test",
+        "Ad spend rises. Clarity doesn’t.",
+        "I check the tracking, then test whether the ad’s promise matches the landing page.",
       ],
       [
-        "Too many disconnected changes",
-        "Ads, offers and product pages send different messages. A shared roadmap puts the most important fix first.",
+        "prioritize",
+        "Too many fixes compete.",
+        "I rank changes by impact and effort so you know what to ship first.",
       ],
     ]
       .map(
-        ([a, b], i) =>
-          `<article class="card">${icon(i)}<h3>${a}</h3><p>${b}</p></article>`,
+        ([image, title, answer]) =>
+          `<article class="diagnostic"><img src="/assets/method/${image}.webp" width="640" height="208" alt="" loading="lazy"><div><h3>${title}</h3><p>${answer}</p></div></article>`,
       )
-      .join("")}</div>`,
+      .join(
+        "",
+      )}</div><a href="/process#method" class="textlink">See my six-step method</a>`,
 );
 const system = section(
   "method",
@@ -102,7 +96,7 @@ function workCards(filter = false) {
             .join(
               "",
             )}</ul><p>${esc(x.approach.join(" "))}</p><p>${esc(x.outcomeText)}</p><p>${esc(x.evidenceType)} · ${esc(x.disclaimer)}</p>${metric ? `<strong>${esc(x.metricValue)} ${esc(x.metricLabel)} · ${esc(x.metricPeriod)}</strong><p>${esc(x.metricDefinition)}</p>` : ""}`;
-      return `<article id="${filter ? "work" : "featured"}-${esc(x.slug)}" class="card workcard" data-cat="${esc(x.category)}">${brief ? `<img class="project-image" src="/assets/projects/${esc(x.image)}.webp" alt="" width="600" height="360" loading="lazy">` : ""}<div class="project-copy"><small>${esc(x.category)}</small><h3>${esc(title)}</h3><p>${esc(x.challenge)}</p>${filter ? `<details><summary>Read project notes</summary>${detail}</details>` : `<a class="textlink" href="/case-studies#work-${esc(x.slug)}">Explore project</a>`}</div></article>`;
+      return `<article id="${filter ? "work" : "featured"}-${esc(x.slug)}" class="card workcard" data-cat="${esc(x.category)}">${brief ? `<img class="project-image" src="/assets/projects/${esc(x.image)}.webp" alt="" width="600" height="360" loading="lazy">` : ""}<div class="project-copy"><small>${esc(x.category)}</small><h3>${esc(title)}</h3>${filter ? `<p>${esc(x.challenge)}</p>` : ""}${filter ? `<details><summary>Read project notes</summary>${detail}</details>` : `<a class="textlink" href="/case-studies#work-${esc(x.slug)}">Explore project</a>`}</div></article>`;
     })
     .join("");
   return `${filter ? `<div class="filters" aria-label="Filter work">${["All", ...categories].map((x, i) => `<button data-filter="${x}" aria-pressed="${!i}">${x}</button>`).join("")}</div>` : ""}<div class="grid ${filter ? "two" : "three"}">${cards}</div><p class="empty" hidden>No work examples in this category.</p>`;
@@ -110,17 +104,14 @@ function workCards(filter = false) {
 const selected = section(
   "work",
   "",
-  lead(
-    "Selected work",
-    "Different businesses. One disciplined approach.",
-    "Selected project briefs from acquisition, conversion and launch work. Images are editorial illustrations. Each brief explains the scope and what the available evidence shows.",
-  ) +
+  lead("Client work", "From the client project files.") +
     workCards() +
+    '<a class="textlink library-link" href="/case-studies">Explore all seven project briefs</a>' +
     testimonials
       .filter((x) => x.publicationApproved && x.consentApproved)
       .map(
         (x) =>
-          `<blockquote><p>${esc(x.quote)}</p><cite>${esc(x.attribution)}</cite></blockquote>`,
+          `<blockquote><p>“${esc(x.quote)}”</p><cite>${esc(x.attribution)}</cite></blockquote>`,
       )
       .join(""),
 );
@@ -132,7 +123,7 @@ const sprint = section(
     "Four phases. One accountable strategist.",
     "A defined engagement for operating stores and brands preparing to launch.",
   ) +
-    `<div class="grid four">${phases.map(([days, t, h, d, o], i) => `<article class="phase-card"><div class="phase-track" aria-hidden="true">${phases.map((_, j) => `<i class="${i === j ? "active" : ""}"></i>`).join("")}</div><small>DAYS ${days}</small><h3>${t}</h3><p>${d}</p><strong>${o}</strong></article>`).join("")}</div><div class="scope"><div><h3>What’s included</h3><p>Research, funnel and offer review, a prioritized roadmap, agreed CRO, creative, tracking or campaign changes, and a documented handoff.</p></div><div><h3>What you bring</h3><p>A real product, decision-maker access, business context and the ability to act on tests. Pre-launch work focuses on foundations.</p></div><div><h3>Investment & boundaries</h3><p>Investment is scoped after a diagnostic call. Media spend, paid tools and production are separate unless agreed in writing.</p></div></div><div class="actions">${cta("offer")}<a href="/process#deliverables">Explore the full scope</a></div>`,
+    `<div class="grid four">${phases.map(([days, t, h, d, o], i) => `<article class="phase-card"><div class="phase-track" aria-hidden="true">${phases.map((_, j) => `<i class="${i === j ? "active" : ""}"></i>`).join("")}</div><small>DAYS ${days}</small><h3>${t}</h3><p>${d}</p><strong>${o}</strong></article>`).join("")}</div><div class="scope"><div><h3>What’s included</h3><p>Research, funnel and offer review, a prioritized roadmap, agreed CRO, creative, tracking or campaign changes, and a documented handoff.</p></div><div><h3>What you bring</h3><p>A real product, decision-maker access, business context and the ability to act on tests. Pre-launch work focuses on foundations.</p></div><div><h3>Investment & boundaries</h3><p>The full sprint costs ${sprintFee}. Media spend, paid tools and production are separate unless agreed in writing.</p></div></div><div class="actions">${cta("offer")}<a href="/process#deliverables">Explore the full scope</a></div>`,
 );
 const deliverables = section(
   "deliverables",
@@ -173,19 +164,11 @@ const deliverables = section(
       )
       .join("")}</div>`,
 );
-const bio = section(
-  "about",
-  "mint",
-  `<div class="bio"><div>${label("About Samir")}<h2>A direct line to your growth strategist.</h2></div><div><p>I’m Samir Liaquat, an independent ecommerce growth strategist. I connect customer research, paid acquisition and the buying experience in one plan.</p><p>We decide what to change together. You see the priorities, the work in progress and what each test actually tells us.</p><a class="textlink" href="/about">Meet Samir</a></div></div>`,
-);
-const more = section(
-  "additional-work",
-  "",
-  lead(
-    "Project library",
-    "Explore the work by discipline.",
-    "Filter the seven project briefs to see the work behind each engagement.",
-  ) + workCards(true),
+const homeSprint = section(
+  "sprint",
+  "home-band plan-band",
+  lead("45-Day Ecommerce Growth Sprint", "Your 45 days, mapped out.") +
+    `<div class="plan-grid">${phases.map(([days, title, , , output], i) => `<article class="plan-phase"><div class="phase-track" aria-hidden="true">${phases.map((_, j) => `<i class="${i === j ? "active" : ""}"></i>`).join("")}</div><small>Days ${days}</small><h3>${title}</h3><p>${output}</p></article>`).join("")}</div><a class="textlink" href="/process#sprint">View the detailed plan</a>`,
 );
 const faq = section(
   "faq",
@@ -193,9 +176,9 @@ const faq = section(
   `<div class="faqgrid"><div>${lead("FAQs", "Before you apply.")}</div><div>${faqs.map(([q, a]) => `<details><summary>${q}</summary><p>${a}</p></details>`).join("")}</div></div>`,
 );
 const final = section(
-  "apply",
-  "",
-  `<div class="callout"><div>${label("Growth audit application")}<h2>Let’s find your next move.</h2><p>Tell me about your store and your biggest constraint. I’ll review the fit and follow up about the next step.</p></div>${cta("final")}</div>`,
+  "offer",
+  "offer-band",
+  `<div class="engagement"><div>${label("Work with Samir")}<h2>45-Day Ecommerce <br>Growth Sprint</h2><p>One consultant from diagnosis through handoff.</p><ul><li>Store and acquisition audit</li><li>Prioritized roadmap and agreed implementation</li><li>Test findings and a next-step plan</li></ul></div><div class="terms-card"><span>Full sprint fee</span><strong>${sprintFee}</strong><p>Ad spend, paid tools and outside production are separate.</p>${cta("offer")}<a href="/process#faq" class="textlink">Pricing & engagement FAQs</a></div></div>`,
 );
 function field([key, name, rule], i) {
   const attr = `name="${key}" id="${key}" aria-describedby="err-${key}" ${i < 10 ? "required" : ""}`;
@@ -217,7 +200,7 @@ const inner = (tag, h, body) =>
 const pages = {
   "": [
     "Ecommerce Growth Strategist | 45-Day Growth Sprint – Samir Liaquat",
-    hero + pain + system + selected + sprint + bio + more + faq + final,
+    hero + pain + homeSprint + selected + final,
   ],
   process: [
     "The growth method",
@@ -228,7 +211,8 @@ const pages = {
     ) +
       system +
       deliverables +
-      sprint,
+      sprint +
+      faq,
   ],
   about: [
     "About Samir Liaquat",
