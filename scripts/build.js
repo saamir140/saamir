@@ -31,7 +31,8 @@ const lead = (tag, title, desc = "") =>
   `${label(tag)}<h2>${title}</h2>${desc ? `<p class="intro">${desc}</p>` : ""}`;
 const section = (id, cls, content) =>
   `<section class="block ${cls}" id="${id}"><div class="wrap">${content}</div></section>`;
-const hero = `<section id="home" class="advisory-intro"><div class="wrap intro-layout"><div>${label("Independent ecommerce consultant")}<h1>I’m Samir Liaquat.</h1><p class="position">I help founders find what’s holding their store back.</p><p class="description">I audit the customer journey, prioritize the highest-impact changes and work directly with you to test them over 45 days.</p><div class="actions"><a class="button" href="#offer" data-place="hero">See the $500 sprint</a><a class="textlink" href="/about">About Samir</a></div></div><figure><img src="/assets/consulting-desk.webp" width="1000" height="700" alt="A strategist’s workspace with a hand-drawn ecommerce funnel" fetchpriority="high"></figure></div></section>`;
+const portrait = `<figure class="founder-portrait"><img src="/assets/saamir-liaquat.webp" srcset="/assets/saamir-liaquat-560.webp 560w, /assets/saamir-liaquat.webp 1254w" sizes="(max-width: 639px) min(72vw, 320px), 390px" width="1254" height="1254" alt="Samir Liaquat, independent ecommerce growth strategist" fetchpriority="high"></figure>`;
+const hero = `<section id="home" class="advisory-intro"><div class="wrap intro-layout"><div>${label("Independent ecommerce consultant")}<h1>I’m Samir Liaquat.</h1><p class="position">I help founders find what’s holding their store back.</p><p class="description">I audit the customer journey, prioritize the highest-impact changes and work directly with you to test them over 45 days.</p><div class="actions"><a class="button" href="#offer" data-place="hero">See the $500 sprint</a><a class="textlink" href="/about">About Samir</a></div></div>${portrait}</div></section>`;
 const pain = section(
   "problems",
   "home-band",
@@ -223,11 +224,7 @@ const pages = {
   ],
   about: [
     "About Samir Liaquat",
-    inner(
-      "Independent ecommerce growth strategist",
-      "Meet Samir Liaquat.",
-      "<p>I work directly with founders who want to understand why their store is underperforming and decide what to change first.</p><h2>How we work together</h2><p>We begin with customers, economics and the buying journey. I turn those findings into a short list of decisions, agree the scope with you and document what changes. You retain control of business accounts and approvals.</p><h2>Who the sprint suits</h2><p>Operating stores with traffic or sales signals, and pre-launch founders with a defined product and market. If you need guaranteed returns, instant results or an unscoped full rebuild, this engagement is unlikely to fit.</p>",
-    ) + final,
+    `<section class="wrap inner about-founder"><div>${label("Independent ecommerce growth strategist")}<h1>Meet Samir Liaquat.</h1><p>I work directly with founders who want to understand why their store is underperforming and decide what to change first.</p><h2>How we work together</h2><p>We begin with customers, economics and the buying journey. I turn those findings into a short list of decisions, agree the scope with you and document what changes. You retain control of business accounts and approvals.</p><h2>Who the sprint suits</h2><p>Operating stores with traffic or sales signals, and pre-launch founders with a defined product and market. If you need guaranteed returns, instant results or an unscoped full rebuild, this engagement is unlikely to fit.</p></div>${portrait}</section>` + final,
   ],
   "case-studies": [
     "Work library",
