@@ -1387,11 +1387,11 @@ a.button:hover {
   background: var(--card-surface);
 }
 .consulting-funnel #offer {
-  --card-surface: #212017;
-  --card-edge: #4e4931;
-  --card-accent: #e7d793;
+  --card-surface: #2b2115;
+  --card-edge: #80613c;
+  --card-accent: #ffd69a;
 }
-.consulting-funnel #application {
+.consulting-funnel section#application {
   --card-surface: #14221c;
   --card-edge: #304c3b;
   --card-accent: #acdec0;
@@ -1475,7 +1475,7 @@ a.button:hover {
 .scope-lines dd {
   margin: 0;
 }
-.consulting-funnel #application {
+.consulting-funnel section#application {
   border-left: 3px solid var(--card-accent);
 }
 .consulting-funnel .button:hover,
@@ -1617,4 +1617,75 @@ nav .button:hover {
   }
 }
 
-@media(max-width: 359px){.nav .mark{display:none}.funnel-metrics div{flex-wrap:wrap}.week summary>span:last-child{min-width:0;overflow-wrap:anywhere}}
+@media (max-width: 359px) {
+  .nav .mark {
+    display: none;
+  }
+  .funnel-metrics div {
+    flex-wrap: wrap;
+  }
+  .week summary > span:last-child {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+}
+
+#offer .implementation-deliverables {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 32px;
+  padding-inline-start: 1.2rem;
+  margin: 20px 0 24px;
+}
+.implementation-deliverables li {
+  padding-inline-start: 3px;
+  color: #e2dacc;
+  line-height: 1.5;
+}
+.implementation-deliverables li::marker {
+  color: var(--card-accent);
+}
+.implementation-deliverables strong {
+  color: #fff2db;
+}
+.implementation-price {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  border-top: 1px solid var(--card-edge);
+  padding-top: 18px;
+}
+.implementation-price strong {
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: -0.05em;
+  line-height: 1.15;
+  color: var(--card-accent);
+}
+.implementation-price span,
+#offer .fee-note,
+#offer .offer-action p {
+  font-size: 0.9rem;
+  color: #dfd4c7;
+}
+#offer .offer-action {
+  margin-top: 16px;
+}
+#offer .offer-action p {
+  margin: 0 0 7px;
+}
+#offer .offer-action .button {
+  background: #ffd69a;
+  color: #251808;
+}
+#offer .offer-action .button:hover {
+  background: #ffe7c4;
+}
+@media (max-width: 639px) {
+  #offer .implementation-deliverables {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  #offer .offer-action .button {
+    width: 100%;
+  }
+}

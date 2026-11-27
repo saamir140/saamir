@@ -158,9 +158,23 @@ const homeSprint = funnelCard(
   "sprint",
   `<h2>Your 45-day plan</h2><div class="weekly-list">${weeklyPlan.map(([week, days, title, action, output]) => `<details class="week"><summary><span class="week-date">${week}<small>Days ${days}</small></span><span>${title}</span></summary><div class="week-notes"><p>${action}</p><p class="pain-output"><b>You get</b> ${output}</p></div></details>`).join("")}</div><a class="textlink" href="/process">Explore my method</a>`,
 );
+const intakeOpen = process.env.INTAKE_ENABLED === "true";
 const packageCard = funnelCard(
   "offer",
-  `${label("The engagement")}<div class="funnel-price"><h2>45-Day Ecommerce Growth Sprint</h2><div><strong>${sprintFee}</strong><span>Full consulting fee</span></div></div><dl class="scope-lines"><div><dt>Included</dt><dd>Store and acquisition audit, implementation of agreed changes, test reviews and a final handoff.</dd></div><div><dt>Billed separately</dt><dd>Media spend, paid tools and outside production.</dd></div><div><dt>After day 45</dt><dd>Your findings and next-step roadmap. Any ongoing management is agreed separately.</dd></div></dl><a class="textlink" href="/process#faq">Engagement FAQs</a>`,
+  `<h2>45-Day Implementation Offer</h2>
+  <ul class="implementation-deliverables">
+    <li><strong>Audit your store.</strong> I review product pages, checkout, ads and tracking.</li>
+    <li><strong>Diagnose the bottleneck.</strong> I trace where buyers drop off and identify the first fix worth testing.</li>
+    <li><strong>Set priorities.</strong> I rank opportunities by impact, effort and your margins.</li>
+    <li><strong>Build your marketing strategy.</strong> I map the audience, offer and creative angles into a test plan.</li>
+    <li><strong>Implement the plan.</strong> I ship the agreed page, campaign or tracking changes and check they work.</li>
+    <li><strong>Measure the results.</strong> I compare test data with your baseline and hand over findings and next steps.</li>
+  </ul>
+  <div class="implementation-price"><span>Full 45-day fee</span><strong>${sprintFee}</strong></div>
+  <p class="fee-note">Ad spend, paid tools and outside production are separate.</p>
+  <div class="offer-action"${intakeOpen ? "" : ' id="application"'}>
+  ${intakeOpen ? "" : "<p>Applications are currently closed.</p>"}
+  <a class="button" href="/apply" data-place="offer">${intakeOpen ? "Apply for the sprint" : "View application status"}</a></div>`,
 );
 const faq = section(
   "faq",
@@ -189,16 +203,16 @@ const form = `${process.env.INTAKE_ENABLED === "true" ? "" : '<p class="preview-
   )}</div></details><div hidden><input name="company_fax" tabindex="-1" autocomplete="off"></div><label class="check"><input type="checkbox" name="privacy_consent" required aria-describedby="err-privacy_consent"> <span>I have read the <a href="/privacy" target="_blank" rel="noopener">privacy notice</a> and agree to the use of these details to review my application.</span></label><small id="err-privacy_consent"></small><button class="button" type="submit">Submit application</button><noscript><p>Enable JavaScript to submit securely.</p></noscript></form>`;
 const inner = (tag, h, body) =>
   `<div class="wrap inner">${label(tag)}<h1>${h}</h1>${body}</div>`;
-const applicationCard = funnelCard(
-  "application",
-  process.env.INTAKE_ENABLED === "true"
-    ? `<h2>Apply for a Growth Audit</h2><p>Tell me about your store so I can review fit.</p>${form}`
-    : `<h2>Growth audit applications</h2><p>Applications are currently closed.</p><a class="textlink" href="/apply" data-place="offer">View application status</a>`,
-);
+const applicationCard = intakeOpen
+  ? funnelCard(
+      "application",
+      `<h2>Apply for a Growth Audit</h2><p>Tell me about your store so I can review fit.</p>${form}`,
+    )
+  : "";
 const pages = {
   "": [
     "Ecommerce Growth Strategist | 45-Day Growth Sprint – Samir Liaquat",
-    hero + pain + homeSprint + selected + packageCard + applicationCard,
+    hero + pain + homeSprint + selected + applicationCard + packageCard,
   ],
   process: [
     "The growth method",
