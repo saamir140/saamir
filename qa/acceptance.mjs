@@ -36,6 +36,12 @@ try{
  const menu=page.getByRole("button",{name:"Menu"});await menu.focus();await page.keyboard.press("Enter");
  assert.equal(await menu.getAttribute("aria-expanded"),"true");await page.keyboard.press("Escape");assert.equal(await menu.getAttribute("aria-expanded"),"false");assert.ok(await menu.evaluate(el=>el===document.activeElement));
  assert.deepEqual(await page.locator("main > section").evaluateAll(nodes=>nodes.map(n=>n.id)),["home","problems","sprint","work","offer"]);
+ assert.equal(await page.locator("#problems .pain-output").count(),3);
+ assert.equal(await page.locator("#sprint details.week").count(),7);
+ const handoff=page.locator("#sprint details.week").last();
+ await handoff.locator("summary").focus();await page.keyboard.press("Enter");
+ assert.ok(await handoff.evaluate(el=>el.open));
+ assert.match(await handoff.innerText(),/Days 43–45/);
  assert.equal(await page.locator("#offer .terms-card strong").innerText(),"$500 USD");
  assert.equal(await page.locator("#work .result-value").count(),6);
  assert.match(await page.locator("#work").innerText(),/8.79% CTR \(all\)/);
