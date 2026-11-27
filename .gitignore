@@ -3,3 +3,5 @@ dist/
 .env.local
 node_modules/
 .vercel/
+
+qa/results/
