@@ -24,7 +24,7 @@ const cta = (place = "section") =>
 const mark =
   '<span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>';
 const brand = `<a class="brand" aria-label="Samir Liaquat home" href="/">${mark}Samir Liaquat<span>.</span></a>`;
-const nav = `<header id="nav"><div class="wrap nav">${brand}<button class="toggle" aria-expanded="false" aria-controls="links">Menu</button><nav id="links" aria-label="Main navigation"><a href="/about">About Samir</a><a href="/#problems">Approach</a><a href="/#sprint">45-Day Sprint</a><a href="/#work">Client results</a>${cta("navigation")}</nav></div></header>`;
+const nav = `<header id="nav"><div class="wrap nav">${brand}<button class="toggle" aria-expanded="false" aria-controls="links">Menu</button><nav id="links" aria-label="Main navigation"><a href="/about">About Samir</a><a href="/#sprint">Plan</a><a href="/#work">Results</a><a class="button" href="/#offer">Sprint pricing</a></nav></div></header>`;
 const footer = `<footer><div class="wrap foot">${brand}<span>© ${new Date().getUTCFullYear()} Samir Liaquat</span><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/apply">Contact</a></div></footer>`;
 const label = (s) => `<div class="label"><b></b>${s}</div>`;
 const lead = (tag, title, desc = "") =>
@@ -32,38 +32,18 @@ const lead = (tag, title, desc = "") =>
 const section = (id, cls, content) =>
   `<section class="block ${cls}" id="${id}"><div class="wrap">${content}</div></section>`;
 const portrait = `<figure class="founder-portrait"><img src="/assets/saamir-liaquat.webp" srcset="/assets/saamir-liaquat-560.webp 560w, /assets/saamir-liaquat.webp 1254w" sizes="(max-width: 639px) min(72vw, 320px), 390px" width="1254" height="1254" alt="Samir Liaquat, independent ecommerce growth strategist" fetchpriority="high"></figure>`;
-const hero = `<section id="home" class="advisory-intro"><div class="wrap intro-layout"><div>${label("Independent ecommerce consultant")}<h1>I’m Samir Liaquat.</h1><p class="position">I help founders find what’s holding their store back.</p><p class="description">I audit the customer journey, prioritize the highest-impact changes and work directly with you to test them over 45 days.</p><div class="actions"><a class="button" href="#offer" data-place="hero">See the $500 sprint</a><a class="textlink" href="/about">About Samir</a></div></div>${portrait}</div></section>`;
-const pain = section(
+const funnelCard = (id, content) =>
+  `<section id="${id}" class="funnel-card">${content}</section>`;
+const hero = funnelCard(
+  "home",
+  `<div class="funnel-opening"><div>${label("45-Day Ecommerce Growth Sprint")}<h1>Find where your store loses buyers.</h1><p>I’m Samir Liaquat. I audit the journey from ad to checkout, fix the priority friction points with you, and test what changes.</p><div class="actions"><a class="button" href="#offer" data-place="hero">See the $500 sprint</a><a class="textlink" href="#work">Client results</a></div></div>${portrait}</div>`,
+);
+const pain = funnelCard(
   "problems",
-  "home-band",
-  lead("Business pain points & my method", "Where are you losing customers?") +
-    `<div class="diagnostic-grid">${[
-      [
-        "diagnose",
-        "Shoppers add to cart, then leave.",
-        "I follow the cart through checkout, checking when shipping costs appear and which payment steps cause friction.",
-        "A checkout friction map and one fix to test.",
-      ],
-      [
-        "test",
-        "Ads get clicks. Orders stay flat.",
-        "I compare the ad with the page it sends buyers to, then reconcile purchase events with store orders.",
-        "A tracking check and an ad-to-page test brief.",
-      ],
-      [
-        "prioritize",
-        "Everything feels like a priority.",
-        "I weigh the likely impact, your margins and the effort each change takes. We pick the first test together.",
-        "A ranked backlog with a clear first decision.",
-      ],
-    ]
-      .map(
-        ([image, title, answer, output]) =>
-          `<article class="diagnostic"><img src="/assets/method/${image}.webp" width="640" height="208" alt="" loading="lazy"><div><h3>${title}</h3><p>${answer}</p><p class="pain-output"><b>You get</b> ${output}</p></div></article>`,
-      )
-      .join(
-        "",
-      )}</div><a href="/process#method" class="textlink">See my six-step method</a>`,
+  `<h2>What I’ll work on with you</h2><ul class="funnel-inclusions">
+<li><strong>Shoppers abandon checkout</strong><span>I trace shipping, payment and trust issues. You get a friction map and a first fix to test.</span></li>
+<li><strong>Clicks don’t turn into orders</strong><span>I check ad-to-page fit and reconcile purchase events. You get a tracking check and test brief.</span></li>
+<li><strong>Every change feels urgent</strong><span>I weigh impact, margins and effort. You get a ranked roadmap and agreed implementation priorities.</span></li></ul>`,
 );
 const system = section(
   "method",
@@ -106,23 +86,24 @@ function workCards(filter = false) {
     .join("");
   return `${filter ? `<div class="filters" aria-label="Filter work">${["All", ...categories].map((x, i) => `<button data-filter="${x}" aria-pressed="${!i}">${x}</button>`).join("")}</div>` : ""}<div class="grid ${filter ? "two" : "three"}">${cards}</div><p class="empty" hidden>No work examples in this category.</p>`;
 }
-const selected = section(
+const featuredCampaign = projectBriefs.find(
+  (x) => x.slug === "messaging-acquisition",
+);
+const campaignMetrics = featuredCampaign.readings
+  .slice(0, 3)
+  .map(
+    ([name, value]) => `<div><dt>${esc(name)}</dt><dd>${esc(value)}</dd></div>`,
+  )
+  .join("");
+const selected = funnelCard(
   "work",
-  "",
-  lead(
-    "Client results",
-    "Campaign results & brand launches.",
-    "Campaign dashboard readings, sales reported by Samir, and launches in progress. Open a project for the source and scope.",
-  ) +
-    workCards() +
-    '<a class="textlink library-link" href="/case-studies">Explore all seven project briefs</a>' +
-    testimonials
-      .filter((x) => x.publicationApproved && x.consentApproved)
-      .map(
-        (x) =>
-          `<blockquote><p>“${esc(x.quote)}”</p><cite>${esc(x.attribution)}</cite></blockquote>`,
-      )
-      .join(""),
+  `${label("Client results")}<h2>Turning ad spend into conversations</h2><p>A lead-generation project with a tightly controlled budget. These figures come from the campaign dashboard.</p><dl class="funnel-metrics">${campaignMetrics}</dl><p class="evidence-note">Samir separately reports PKR 25,000 in sales. The dashboard records messaging activity.</p><details class="additional-results"><summary>More results &amp; brand launches</summary>${workCards()}</details><a class="textlink" href="/case-studies">Read all seven project briefs</a>${testimonials
+    .filter((x) => x.publicationApproved && x.consentApproved)
+    .map(
+      (x) =>
+        `<blockquote><p>${esc(x.quote)}</p><cite>${esc(x.attribution)}</cite></blockquote>`,
+    )
+    .join("")}`,
 );
 const sprint = section(
   "sprint",
@@ -173,10 +154,13 @@ const deliverables = section(
       )
       .join("")}</div>`,
 );
-const homeSprint = section(
+const homeSprint = funnelCard(
   "sprint",
-  "home-band plan-band",
-  `<div class="weekly-layout"><div class="weekly-intro">${lead("45-Day Ecommerce Growth Sprint", "What I’ll do each week.", "Six working weeks, then three days for review and handoff. Open a week to see the work and what you’ll receive.")}<a class="textlink" href="/process#sprint">Explore the four sprint phases</a></div><div class="weekly-list">${weeklyPlan.map(([week, days, title, action, output], i) => `<details class="week" ${i === 0 ? "open" : ""}><summary><span class="week-date">${week}<small>Days ${days}</small></span><span>${title}</span></summary><div class="week-notes"><p>${action}</p><p class="pain-output"><b>You get</b> ${output}</p></div></details>`).join("")}</div></div>`,
+  `<h2>Your 45-day plan</h2><div class="weekly-list">${weeklyPlan.map(([week, days, title, action, output]) => `<details class="week"><summary><span class="week-date">${week}<small>Days ${days}</small></span><span>${title}</span></summary><div class="week-notes"><p>${action}</p><p class="pain-output"><b>You get</b> ${output}</p></div></details>`).join("")}</div><a class="textlink" href="/process">Explore my method</a>`,
+);
+const packageCard = funnelCard(
+  "offer",
+  `${label("The engagement")}<div class="funnel-price"><h2>45-Day Ecommerce Growth Sprint</h2><div><strong>${sprintFee}</strong><span>Full consulting fee</span></div></div><dl class="scope-lines"><div><dt>Included</dt><dd>Store and acquisition audit, implementation of agreed changes, test reviews and a final handoff.</dd></div><div><dt>Billed separately</dt><dd>Media spend, paid tools and outside production.</dd></div><div><dt>After day 45</dt><dd>Your findings and next-step roadmap. Any ongoing management is agreed separately.</dd></div></dl><a class="textlink" href="/process#faq">Engagement FAQs</a>`,
 );
 const faq = section(
   "faq",
@@ -205,10 +189,16 @@ const form = `${process.env.INTAKE_ENABLED === "true" ? "" : '<p class="preview-
   )}</div></details><div hidden><input name="company_fax" tabindex="-1" autocomplete="off"></div><label class="check"><input type="checkbox" name="privacy_consent" required aria-describedby="err-privacy_consent"> <span>I have read the <a href="/privacy" target="_blank" rel="noopener">privacy notice</a> and agree to the use of these details to review my application.</span></label><small id="err-privacy_consent"></small><button class="button" type="submit">Submit application</button><noscript><p>Enable JavaScript to submit securely.</p></noscript></form>`;
 const inner = (tag, h, body) =>
   `<div class="wrap inner">${label(tag)}<h1>${h}</h1>${body}</div>`;
+const applicationCard = funnelCard(
+  "application",
+  process.env.INTAKE_ENABLED === "true"
+    ? `<h2>Apply for a Growth Audit</h2><p>Tell me about your store so I can review fit.</p>${form}`
+    : `<h2>Growth audit applications</h2><p>Applications are currently closed.</p><a class="textlink" href="/apply" data-place="offer">View application status</a>`,
+);
 const pages = {
   "": [
     "Ecommerce Growth Strategist | 45-Day Growth Sprint – Samir Liaquat",
-    hero + pain + homeSprint + selected + final,
+    hero + pain + homeSprint + selected + packageCard + applicationCard,
   ],
   process: [
     "The growth method",
@@ -224,7 +214,8 @@ const pages = {
   ],
   about: [
     "About Samir Liaquat",
-    `<section class="wrap inner about-founder"><div>${label("Independent ecommerce growth strategist")}<h1>Meet Samir Liaquat.</h1><p>I work directly with founders who want to understand why their store is underperforming and decide what to change first.</p><h2>How we work together</h2><p>We begin with customers, economics and the buying journey. I turn those findings into a short list of decisions, agree the scope with you and document what changes. You retain control of business accounts and approvals.</p><h2>Who the sprint suits</h2><p>Operating stores with traffic or sales signals, and pre-launch founders with a defined product and market. If you need guaranteed returns, instant results or an unscoped full rebuild, this engagement is unlikely to fit.</p></div>${portrait}</section>` + final,
+    `<section class="wrap inner about-founder"><div>${label("Independent ecommerce growth strategist")}<h1>Meet Samir Liaquat.</h1><p>I work directly with founders who want to understand why their store is underperforming and decide what to change first.</p><h2>How we work together</h2><p>We begin with customers, economics and the buying journey. I turn those findings into a short list of decisions, agree the scope with you and document what changes. You retain control of business accounts and approvals.</p><h2>Who the sprint suits</h2><p>Operating stores with traffic or sales signals, and pre-launch founders with a defined product and market. If you need guaranteed returns, instant results or an unscoped full rebuild, this engagement is unlikely to fit.</p></div>${portrait}</section>` +
+      final,
   ],
   "case-studies": [
     "Work library",
@@ -307,7 +298,7 @@ for (const [slug, [title, body]] of Object.entries(pages)) {
         }
       : {}),
   });
-  const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="theme-color" content="#090a0b"><meta name="color-scheme" content="dark"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(desc)}"><meta name="robots" content="${live && !["404", "apply", "thank-you", "case-studies"].includes(slug) ? "index,follow" : "noindex,follow"}"><link rel="canonical" href="${origin + path}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:image" content="${origin}/assets/share.png"><script type="application/ld+json">${schema}</script><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/style.css"><script defer src="/script.js"></script></head><body><a href="#main" class="skip">Skip to content</a>${nav}<main id="main">${body}</main>${footer}</body></html>`;
+  const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="theme-color" content="#090a0b"><meta name="color-scheme" content="dark"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(desc)}"><meta name="robots" content="${live && !["404", "apply", "thank-you", "case-studies"].includes(slug) ? "index,follow" : "noindex,follow"}"><link rel="canonical" href="${origin + path}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:image" content="${origin}/assets/share.png"><script type="application/ld+json">${schema}</script><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/style.css"><script defer src="/script.js"></script></head><body><a href="#main" class="skip">Skip to content</a>${nav}<main id="main"${slug === "" ? ' class="consulting-funnel"' : ""}>${body}</main>${footer}</body></html>`;
   await writeFile("dist/" + (slug || "index") + ".html", html);
 }
 await writeFile(

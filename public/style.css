@@ -1246,14 +1246,16 @@ a.button:hover {
   }
 }
 
-.founder-portrait, .advisory-intro .founder-portrait {
+.founder-portrait,
+.advisory-intro .founder-portrait {
   width: min(100%, 390px);
   margin: 0 auto;
   border-radius: 14px;
   overflow: hidden;
   border: 1px solid var(--rule);
 }
-.founder-portrait img, .advisory-intro .founder-portrait img {
+.founder-portrait img,
+.advisory-intro .founder-portrait img {
   display: block;
   width: 100%;
   height: auto;
@@ -1265,10 +1267,242 @@ a.button:hover {
   align-items: start;
   gap: clamp(28px, 5vw, 70px);
 }
-.about-founder h1 {font-size: clamp(2.4rem, 5vw, 4.1rem); margin: 12px 0 20px;}
-.about-founder h2 {font-size: 1.65rem; margin: 24px 0 8px;}
-.about-founder p {color: var(--muted);}
+.about-founder h1 {
+  font-size: clamp(2.4rem, 5vw, 4.1rem);
+  margin: 12px 0 20px;
+}
+.about-founder h2 {
+  font-size: 1.65rem;
+  margin: 24px 0 8px;
+}
+.about-founder p {
+  color: var(--muted);
+}
 @media (max-width: 639px) {
-  .about-founder {grid-template-columns: 1fr;}
-  .founder-portrait, .advisory-intro .founder-portrait {width: min(72vw, 320px);}
+  .about-founder {
+    grid-template-columns: 1fr;
+  }
+  .founder-portrait,
+  .advisory-intro .founder-portrait {
+    width: min(72vw, 320px);
+  }
+}
+
+/* A single column keeps the offer, evidence, scope and application in reading order. */
+:root {
+  --teal: #c2ee83;
+  --brand: #a6d866;
+  --focus: #d1f7a0;
+}
+.consulting-funnel {
+  width: min(936px, calc(100% - 48px));
+  margin: 24px auto 40px;
+  display: grid;
+  gap: 14px;
+}
+.consulting-funnel .funnel-card {
+  background: #121414;
+  border: 1px solid #343936;
+  border-radius: 18px;
+  padding: clamp(22px, 3.5vw, 42px);
+  scroll-margin-top: 84px;
+}
+.consulting-funnel #home {
+  background: linear-gradient(115deg, #1c211c, #111413 65%);
+}
+.consulting-funnel h1,
+.consulting-funnel h2,
+.funnel-price strong {
+  font-family: Inter, system-ui, sans-serif;
+  font-weight: 650;
+  letter-spacing: -0.05em;
+  color: #f1f3ed;
+}
+.consulting-funnel h1 {
+  font-size: clamp(2.25rem, 4.6vw, 3.85rem);
+  line-height: 1.02;
+  max-width: 15ch;
+  margin: 16px 0;
+}
+.consulting-funnel h2 {
+  font-size: clamp(1.45rem, 2.6vw, 2.1rem);
+  margin: 0 0 14px;
+  line-height: 1.13;
+}
+.consulting-funnel .label {
+  margin-bottom: 12px;
+}
+.funnel-opening {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(20px, 4vw, 48px);
+}
+.funnel-opening .founder-portrait {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 12px;
+}
+.consulting-funnel p,
+.funnel-inclusions span,
+.scope-lines dd {
+  color: #c2c8c2;
+  line-height: 1.5;
+}
+.funnel-inclusions {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.funnel-inclusions li {
+  display: grid;
+  grid-template-columns: 1fr 1.65fr;
+  gap: 22px;
+  border-top: 1px solid var(--rule);
+  padding: 14px 0;
+}
+.funnel-inclusions li:last-child {
+  padding-bottom: 0;
+}
+.consulting-funnel #sprint .weekly-list {
+  margin: 14px 0 4px;
+}
+.consulting-funnel .week summary {
+  padding-block: 9px;
+}
+.consulting-funnel #work,
+.consulting-funnel #problems {
+  background: #121414;
+}
+.funnel-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 20px 0 12px;
+}
+.funnel-metrics div {
+  background: #1a2019;
+  border: 1px solid #343e31;
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: end;
+}
+.funnel-metrics dd {
+  color: var(--teal);
+  font-weight: 650;
+  font-size: clamp(1.15rem, 2.5vw, 1.8rem);
+  letter-spacing: -0.055em;
+  margin: 0;
+}
+.funnel-metrics dt,
+.consulting-funnel .evidence-note {
+  font-size: 0.88rem;
+}
+.additional-results {
+  margin-top: 14px;
+  border-block: 1px solid var(--rule);
+}
+.additional-results summary {
+  cursor: pointer;
+  padding: 14px 0;
+}
+.additional-results[open] {
+  padding-bottom: 12px;
+}
+.consulting-funnel .result-value {
+  color: var(--teal);
+}
+.funnel-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 24px;
+}
+.funnel-price h2 {
+  max-width: 18ch;
+}
+.funnel-price > div {
+  text-align: right;
+  flex-shrink: 0;
+}
+.funnel-price strong {
+  font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+  line-height: 1.05;
+  color: var(--teal);
+}
+.funnel-price span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.scope-lines {
+  margin: 14px 0 0;
+}
+.scope-lines > div {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 12px;
+  border-top: 1px solid var(--rule);
+  padding: 11px 0;
+}
+.scope-lines dt {
+  font-weight: 650;
+}
+.scope-lines dd {
+  margin: 0;
+}
+.consulting-funnel #application {
+  border-left: 3px solid var(--teal);
+}
+.consulting-funnel .button:hover,
+nav .button:hover {
+  background: #d7f6ad;
+}
+@media (max-width: 639px) {
+  .consulting-funnel {
+    width: calc(100% - 24px);
+    margin: 12px auto 24px;
+    gap: 10px;
+  }
+  .consulting-funnel .funnel-card {
+    padding: 20px 16px;
+    border-radius: 13px;
+  }
+  .funnel-opening {
+    grid-template-columns: 1fr;
+  }
+  .funnel-opening .founder-portrait {
+    max-width: 230px;
+  }
+  .funnel-inclusions li {
+    grid-template-columns: 1fr;
+    gap: 3px;
+    padding: 11px 0;
+  }
+  .funnel-price {
+    flex-direction: column;
+    gap: 3px;
+  }
+  .funnel-price > div {
+    text-align: left;
+  }
+  .scope-lines > div {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+  .funnel-metrics {
+    grid-template-columns: 1fr;
+  }
+  .funnel-metrics div {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 12px;
+  }
+  .funnel-metrics dd {
+    white-space: nowrap;
+  }
 }
