@@ -714,9 +714,6 @@ form [aria-invalid="true"] {
 }
 
 /* Material tones distinguish the work, while headings and day ranges carry meaning independently of colour. */
-#problems {
-  background: #101112;
-}
 #problems .card:nth-child(1),
 #deliverables .card:nth-child(3n + 1) {
   background: #17221f;
