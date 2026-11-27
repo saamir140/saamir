@@ -67,6 +67,57 @@ export const phases = [
     "Findings & handoff plan",
   ],
 ];
+export const weeklyPlan = [
+  [
+    "Week 1",
+    "1–7",
+    "Find where buyers drop off",
+    "I walk through the store as a customer, check tracking against store orders and compare product views, carts and checkouts. For a pre-launch store, I test the buying journey and flag gaps before traffic arrives.",
+    "A funnel map, measurement baseline and first bottleneck to investigate.",
+  ],
+  [
+    "Week 2",
+    "8–14",
+    "Choose the first test",
+    "I review customer objections, ad promises, competitor offers and your margins. Together we choose the change worth testing first and agree on how we’ll judge it.",
+    "A ranked list of opportunities and a test brief with a success measure.",
+  ],
+  [
+    "Week 3",
+    "15–21",
+    "Build the agreed changes",
+    "We sign off the scope on day 15. I then implement the first agreed changes, such as clarifying delivery costs on a product page or correcting an event that fires twice.",
+    "An implementation log and a working version ready for review.",
+  ],
+  [
+    "Week 4",
+    "22–28",
+    "Launch and check the test",
+    "I check the changes on mobile and desktop, verify that events fire as expected and launch the agreed test. I record its start date and the baseline for comparison.",
+    "A live test, quality checks and a record of exactly what changed.",
+  ],
+  [
+    "Week 5",
+    "29–35",
+    "Read the early signals",
+    "I finish release checks and review the first observations. I look for tracking problems, changes in traffic mix and whether enough customers have seen the test to support a decision.",
+    "A progress note explaining what we know and what needs more time.",
+  ],
+  [
+    "Week 6",
+    "36–42",
+    "Refine what shows promise",
+    "I compare the available results with the baseline. We decide what to keep, revise or continue measuring, and I make the agreed refinements.",
+    "A decision log with the evidence and rationale for each change.",
+  ],
+  [
+    "Handoff",
+    "43–45",
+    "Leave with a plan you can run",
+    "I walk you through the changes, the results we can support and the questions still open. We agree who owns each next action after the sprint.",
+    "A final review and a prioritized roadmap with clear owners.",
+  ],
+];
 export const faqs = [
   [
     "How much does the sprint cost?",

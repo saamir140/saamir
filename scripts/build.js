@@ -1,6 +1,7 @@
 import { mkdir, writeFile, cp, rm } from "node:fs/promises";
 import {
   sprintFee,
+  weeklyPlan,
   method,
   phases,
   faqs,
@@ -34,27 +35,30 @@ const hero = `<section id="home" class="advisory-intro"><div class="wrap intro-l
 const pain = section(
   "problems",
   "home-band",
-  lead("Problem & approach", "What’s slowing your store down?") +
+  lead("Business pain points & my method", "Where are you losing customers?") +
     `<div class="diagnostic-grid">${[
       [
         "diagnose",
-        "Traffic arrives. Buyers leave.",
-        "I trace the buying journey to find the objection or checkout step costing you orders.",
+        "Shoppers add to cart, then leave.",
+        "I follow the cart through checkout, checking when shipping costs appear and which payment steps cause friction.",
+        "A checkout friction map and one fix to test.",
       ],
       [
         "test",
-        "Ad spend rises. Clarity doesn’t.",
-        "I check the tracking, then test whether the ad’s promise matches the landing page.",
+        "Ads get clicks. Orders stay flat.",
+        "I compare the ad with the page it sends buyers to, then reconcile purchase events with store orders.",
+        "A tracking check and an ad-to-page test brief.",
       ],
       [
         "prioritize",
-        "Too many fixes compete.",
-        "I rank changes by impact and effort so you know what to ship first.",
+        "Everything feels like a priority.",
+        "I weigh the likely impact, your margins and the effort each change takes. We pick the first test together.",
+        "A ranked backlog with a clear first decision.",
       ],
     ]
       .map(
-        ([image, title, answer]) =>
-          `<article class="diagnostic"><img src="/assets/method/${image}.webp" width="640" height="208" alt="" loading="lazy"><div><h3>${title}</h3><p>${answer}</p></div></article>`,
+        ([image, title, answer, output]) =>
+          `<article class="diagnostic"><img src="/assets/method/${image}.webp" width="640" height="208" alt="" loading="lazy"><div><h3>${title}</h3><p>${answer}</p><p class="pain-output"><b>You get</b> ${output}</p></div></article>`,
       )
       .join(
         "",
@@ -127,7 +131,7 @@ const sprint = section(
     "Four phases. One accountable strategist.",
     "A defined engagement for operating stores and brands preparing to launch.",
   ) +
-    `<div class="grid four">${phases.map(([days, t, h, d, o], i) => `<article class="phase-card"><div class="phase-track" aria-hidden="true">${phases.map((_, j) => `<i class="${i === j ? "active" : ""}"></i>`).join("")}</div><small>DAYS ${days}</small><h3>${t}</h3><p>${d}</p><strong>${o}</strong></article>`).join("")}</div><div class="scope"><div><h3>What’s included</h3><p>Research, funnel and offer review, a prioritized roadmap, agreed CRO, creative, tracking or campaign changes, and a documented handoff.</p></div><div><h3>What you bring</h3><p>A real product, decision-maker access, business context and the ability to act on tests. Pre-launch work focuses on foundations.</p></div><div><h3>Investment & boundaries</h3><p>The full sprint costs ${sprintFee}. Media spend, paid tools and production are separate unless agreed in writing.</p></div></div><div class="actions">${cta("offer")}<a href="/process#deliverables">Explore the full scope</a></div>`,
+    `<div class="grid four">${phases.map(([days, t, h, d, o], i) => `<article class="phase-card"><div class="phase-track" aria-hidden="true">${phases.map((_, j) => `<i class="${i === j ? "active" : ""}"></i>`).join("")}</div><small>DAYS ${days}</small><h3>${t}</h3><p>${d}</p><strong>${o}</strong></article>`).join("")}</div><div class="scope"><div><h3>What’s included</h3><p>Research, funnel and offer review, a prioritized roadmap, agreed CRO, creative, tracking or campaign changes, and a documented handoff.</p></div><div><h3>What you bring</h3><p>A real product, decision-maker access, business context and the ability to act on tests. Pre-launch work focuses on foundations.</p></div><div><h3>Investment & boundaries</h3><p>The full sprint costs ${sprintFee}. Media spend, paid tools and production are separate unless agreed in writing.</p></div></div><div class="actions">${cta("offer")}<a href="/process#deliverables">Explore the full scope</a><a href="/#sprint">Week-by-week roadmap</a></div>`,
 );
 const deliverables = section(
   "deliverables",
@@ -171,8 +175,7 @@ const deliverables = section(
 const homeSprint = section(
   "sprint",
   "home-band plan-band",
-  lead("45-Day Ecommerce Growth Sprint", "Your 45 days, mapped out.") +
-    `<div class="plan-grid">${phases.map(([days, title, , , output], i) => `<article class="plan-phase"><div class="phase-track" aria-hidden="true">${phases.map((_, j) => `<i class="${i === j ? "active" : ""}"></i>`).join("")}</div><small>Days ${days}</small><h3>${title}</h3><p>${output}</p></article>`).join("")}</div><a class="textlink" href="/process#sprint">View the detailed plan</a>`,
+  `<div class="weekly-layout"><div class="weekly-intro">${lead("45-Day Ecommerce Growth Sprint", "What I’ll do each week.", "Six working weeks, then three days for review and handoff. Open a week to see the work and what you’ll receive.")}<a class="textlink" href="/process#sprint">Explore the four sprint phases</a></div><div class="weekly-list">${weeklyPlan.map(([week, days, title, action, output], i) => `<details class="week" ${i === 0 ? "open" : ""}><summary><span class="week-date">${week}<small>Days ${days}</small></span><span>${title}</span></summary><div class="week-notes"><p>${action}</p><p class="pain-output"><b>You get</b> ${output}</p></div></details>`).join("")}</div></div>`,
 );
 const faq = section(
   "faq",
