@@ -8,17 +8,16 @@
 :root {
   color-scheme: dark;
   background: #090a0b;
-  --navy: #f6f3ec;
-  --ink: #e6e8e6;
-  --teal: #95deca;
-  --brand: #67baa4;
-  --mint: #1b2925;
+  --navy: #f1f5fa;
+  --ink: #e5eaf0;
+  --teal: #9ac9ff;
+  --brand: #77b1f5;
+  --mint: #1b2634;
   --cloud: #161819;
-  --rule: #383b3c;
-  --amber: #e5a85b;
+  --rule: #353e4a;
   --error: #ffafa8;
-  --focus: #c1abff;
-  --muted: #bfc4c1;
+  --focus: #c1deff;
+  --muted: #bec7d2;
   font-family:
     Inter,
     system-ui,
@@ -164,7 +163,7 @@ nav a:hover,
 }
 .button {
   background: var(--teal);
-  color: #10201a;
+  color: #0b1a2b;
   text-decoration: none;
   border-radius: 12px;
   min-height: 50px;
@@ -173,7 +172,7 @@ nav a:hover,
   transition: background 0.18s;
 }
 .button:hover {
-  background: #b1eedc;
+  background: #c5e3ff;
 }
 .button:disabled {
   opacity: 0.65;
@@ -380,7 +379,7 @@ footer,
 }
 .dark :is(.label, small),
 .callout .label {
-  color: #88dfd4;
+  color: #9dcbff;
 }
 .dark p,
 .callout p {
@@ -392,8 +391,8 @@ footer,
 }
 .dark .button,
 .callout .button {
-  background: #a7ebdf;
-  color: #123031;
+  background: #abd7ff;
+  color: #102438;
 }
 .bio,
 .faqgrid {
@@ -439,7 +438,7 @@ details p {
   margin-right: auto;
 }
 .foot .mark i {
-  background: #88dfd4;
+  background: #9dcbff;
 }
 .inner {
   padding-block: 64px 84px;
@@ -470,7 +469,7 @@ details p {
 }
 .filters [aria-pressed="true"] {
   background: var(--teal);
-  color: #10201a;
+  color: #0b1a2b;
 }
 .empty {
   margin-top: 16px;
@@ -716,21 +715,21 @@ form [aria-invalid="true"] {
 /* Material tones distinguish the work, while headings and day ranges carry meaning independently of colour. */
 #problems .card:nth-child(1),
 #deliverables .card:nth-child(3n + 1) {
-  background: #17221f;
+  background: #18222e;
 }
 #problems .card:nth-child(2),
 #deliverables .card:nth-child(3n + 2) {
-  background: #26221b;
+  background: #1c2430;
 }
 #problems .card:nth-child(3),
 #deliverables .card:nth-child(3n) {
-  background: #211e27;
+  background: #202432;
 }
 #method {
   background: #0d0f10;
 }
 .method article.step-card {
-  border: 1px solid #313b36;
+  border: 1px solid #323d4a;
   padding: 0;
   border-radius: 16px;
   overflow: hidden;
@@ -766,7 +765,7 @@ form [aria-invalid="true"] {
 .project-image {
   aspect-ratio: 5/3;
   height: auto;
-  background: #292c2a;
+  background: #242a32;
 }
 .project-copy h3 {
   margin-top: 8px;
@@ -796,16 +795,16 @@ form [aria-invalid="true"] {
   padding: 22px;
   border: 0;
   border-radius: 14px;
-  color: #e6e8e6;
+  color: #e5eaf0;
   background: var(--phase-surface);
 }
 .phase-card:nth-child(1) {
-  --phase-surface: #17251f;
-  --phase-ink: #a4d4bd;
+  --phase-surface: #182436;
+  --phase-ink: #a1c7f4;
 }
 .phase-card:nth-child(2) {
-  --phase-surface: #28231a;
-  --phase-ink: #e0c18c;
+  --phase-surface: #1b2830;
+  --phase-ink: #a4d2e0;
 }
 .phase-card:nth-child(3) {
   --phase-surface: #19242d;
@@ -816,7 +815,7 @@ form [aria-invalid="true"] {
   --phase-ink: #c8b9e2;
 }
 #sprint .phase-card h3 {
-  color: #f0f1eb;
+  color: #eef2f7;
 }
 #sprint .phase-card p {
   color: #c4cacf;
@@ -865,7 +864,7 @@ form [aria-invalid="true"] {
   letter-spacing: -0.045em;
 }
 .advisory-intro h1 {
-  color: #f7f4ed;
+  color: #eff4f9;
   font-size: clamp(2.6rem, 4.7vw, 4rem);
   margin: 18px 0 8px;
 }
@@ -873,18 +872,18 @@ form [aria-invalid="true"] {
   font-size: clamp(1.55rem, 2.7vw, 2.3rem);
   line-height: 1.13;
   max-width: 23ch;
-  color: #b9d3c6;
+  color: #b7cde7;
 }
 .advisory-intro .description {
   font-size: 1rem;
   max-width: 52ch;
-  color: #c4c9c6;
+  color: #c2cad4;
   margin-top: 15px;
 }
 .advisory-intro figure {
   border-radius: 12px;
   overflow: hidden;
-  background: #24231f;
+  background: #20252b;
 }
 .advisory-intro figure img {
   display: block;
@@ -920,14 +919,14 @@ form [aria-invalid="true"] {
 .diagnostic {
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid #373b39;
-  background: #171d1a;
+  border: 1px solid #343d48;
+  background: #181f2b;
 }
 .diagnostic:nth-child(2) {
-  background: #201c18;
+  background: #1e2530;
 }
 .diagnostic:nth-child(3) {
-  background: #1b1920;
+  background: #1c202c;
 }
 .diagnostic img {
   display: block;
@@ -965,13 +964,13 @@ form [aria-invalid="true"] {
 }
 .plan-phase {
   border-radius: 12px;
-  background: #19241f;
+  background: #172431;
   padding: 18px;
-  --phase-ink: #a5d9bd;
+  --phase-ink: #9bc7ec;
 }
 .plan-phase:nth-child(2) {
-  background: #292419;
-  --phase-ink: #eed09b;
+  background: #202732;
+  --phase-ink: #b2c9e4;
 }
 .plan-phase:nth-child(3) {
   background: #19232c;
@@ -1003,7 +1002,7 @@ form [aria-invalid="true"] {
   margin-top: 0;
 }
 .engagement {
-  background: #171c1a;
+  background: #131d2c;
   color: #fff;
   border-radius: 16px;
   display: grid;
@@ -1016,7 +1015,7 @@ form [aria-invalid="true"] {
   color: #fff;
 }
 .engagement .label {
-  color: #bdddc7;
+  color: #bfdaff;
 }
 .engagement ul {
   margin: 14px 0 0;
@@ -1026,10 +1025,10 @@ form [aria-invalid="true"] {
   padding: 2px 0;
 }
 .engagement li::marker {
-  color: #bfda9e;
+  color: #a2cbff;
 }
 .terms-card {
-  border-left: 1px solid #66877b;
+  border-left: 1px solid #495e79;
   padding-left: clamp(18px, 4vw, 42px);
 }
 .terms-card > span,
@@ -1044,12 +1043,12 @@ form [aria-invalid="true"] {
 }
 .terms-card .button {
   margin-top: 14px;
-  background: #efddb2;
-  color: #1b342b;
+  background: #b5d8ff;
+  color: #132943;
 }
 .terms-card .textlink {
   display: table;
-  color: #d6eee0;
+  color: #d7eaff;
   padding-top: 10px;
 }
 @media (max-width: 800px) {
@@ -1115,7 +1114,7 @@ form [aria-invalid="true"] {
   }
   .terms-card {
     border-left: none;
-    border-top: 1px solid #66877b;
+    border-top: 1px solid #495e79;
     padding: 16px 0 0;
   }
   .engagement h2 br {
@@ -1131,7 +1130,7 @@ footer {
   background: #090a0b;
 }
 .engagement {
-  border: 1px solid #38423c;
+  border: 1px solid #344155;
 }
 #work .project-copy {
   padding-bottom: 12px;
@@ -1141,12 +1140,12 @@ footer {
     normal clamp(1.4rem, 2.2vw, 2rem)/1.15 Georgia,
     serif;
   letter-spacing: -0.025em;
-  color: #f5e1b7;
+  color: #b6d8ff;
   margin: 9px 0;
 }
 .workcard .result-note {
   font-size: 0.9rem;
-  color: #d2d5cc;
+  color: #ccd4df;
 }
 .diagnostic img,
 .step-image {
@@ -1156,7 +1155,7 @@ footer {
   padding-left: 20px;
 }
 a.button:hover {
-  color: #10201a;
+  color: #0b1a2b;
 }
 
 .pain-output {
@@ -1287,9 +1286,9 @@ a.button:hover {
 
 /* A single column keeps the offer, evidence, scope and application in reading order. */
 :root {
-  --teal: #c2ee83;
-  --brand: #a6d866;
-  --focus: #d1f7a0;
+  --teal: #9dcbff;
+  --brand: #81b6f7;
+  --focus: #c6e4ff;
 }
 .consulting-funnel {
   width: min(936px, calc(100% - 48px));
@@ -1306,9 +1305,9 @@ a.button:hover {
   scroll-margin-top: 84px;
 }
 .consulting-funnel #home {
-  --card-surface: #182019;
-  --card-edge: #394c39;
-  --card-accent: #c2ee83;
+  --card-surface: #151a21;
+  --card-edge: #364351;
+  --card-accent: #9dcbff;
 }
 .consulting-funnel h1,
 .consulting-funnel h2,
@@ -1316,7 +1315,7 @@ a.button:hover {
   font-family: Inter, system-ui, sans-serif;
   font-weight: 650;
   letter-spacing: -0.05em;
-  color: #f1f3ed;
+  color: #f2f6fb;
 }
 .consulting-funnel h1 {
   font-size: clamp(2.25rem, 4.6vw, 3.85rem);
@@ -1346,7 +1345,7 @@ a.button:hover {
 .consulting-funnel p,
 .funnel-inclusions span,
 .scope-lines dd {
-  color: #c2c8c2;
+  color: #c5cdda;
   line-height: 1.5;
 }
 .funnel-inclusions {
@@ -1371,30 +1370,30 @@ a.button:hover {
   padding-block: 9px;
 }
 .consulting-funnel #problems {
-  --card-surface: #201c19;
-  --card-edge: #4a3830;
-  --card-accent: #edbb94;
+  --card-surface: #1b202a;
+  --card-edge: #3b4657;
+  --card-accent: #c4d4e9;
 }
 .consulting-funnel #sprint {
-  --card-surface: #151d25;
-  --card-edge: #304459;
-  --card-accent: #a4c9ef;
+  --card-surface: #14212a;
+  --card-edge: #304b5a;
+  --card-accent: #a4d5e9;
 }
 .consulting-funnel #work {
-  --card-surface: #1e1925;
-  --card-edge: #46384e;
-  --card-accent: #d2b5e9;
+  --card-surface: #191e30;
+  --card-edge: #394365;
+  --card-accent: #bdcafa;
   background: var(--card-surface);
 }
 .consulting-funnel #offer {
-  --card-surface: #2b2115;
-  --card-edge: #80613c;
-  --card-accent: #ffd69a;
+  --card-surface: #142642;
+  --card-edge: #486e9f;
+  --card-accent: #a6d1ff;
 }
 .consulting-funnel section#application {
-  --card-surface: #14221c;
-  --card-edge: #304c3b;
-  --card-accent: #acdec0;
+  --card-surface: #17242c;
+  --card-edge: #304653;
+  --card-accent: #abd9eb;
 }
 .funnel-metrics {
   display: grid;
@@ -1403,8 +1402,8 @@ a.button:hover {
   margin: 20px 0 12px;
 }
 .funnel-metrics div {
-  background: #1a2019;
-  border: 1px solid #343e31;
+  background: #1d2532;
+  border: 1px solid #36445b;
   border-radius: 10px;
   padding: 14px;
   display: flex;
@@ -1480,7 +1479,7 @@ a.button:hover {
 }
 .consulting-funnel .button:hover,
 nav .button:hover {
-  background: #d7f6ad;
+  background: #c5e1ff;
 }
 @media (max-width: 639px) {
   .consulting-funnel {
@@ -1581,10 +1580,10 @@ nav .button:hover {
 .funnel-price span {
   font-size: 0.875rem;
   line-height: 1.45;
-  color: #c1c9c5;
+  color: #c0cad9;
 }
 .consulting-funnel .funnel-metrics div {
-  background: #29232e;
+  background: #212940;
   border-color: var(--card-edge);
 }
 .consulting-funnel .funnel-metrics dd,
@@ -1639,14 +1638,14 @@ nav .button:hover {
 }
 .implementation-deliverables li {
   padding-inline-start: 3px;
-  color: #e2dacc;
+  color: #d4dff0;
   line-height: 1.5;
 }
 .implementation-deliverables li::marker {
   color: var(--card-accent);
 }
 .implementation-deliverables strong {
-  color: #fff2db;
+  color: #f0f6ff;
 }
 .implementation-price {
   display: flex;
@@ -1665,7 +1664,7 @@ nav .button:hover {
 #offer .fee-note,
 #offer .offer-action p {
   font-size: 0.9rem;
-  color: #dfd4c7;
+  color: #c3d3e9;
 }
 #offer .offer-action {
   margin-top: 16px;
@@ -1674,11 +1673,11 @@ nav .button:hover {
   margin: 0 0 7px;
 }
 #offer .offer-action .button {
-  background: #ffd69a;
-  color: #251808;
+  background: #a6d1ff;
+  color: #0c203a;
 }
 #offer .offer-action .button:hover {
-  background: #ffe7c4;
+  background: #cbe5ff;
 }
 @media (max-width: 639px) {
   #offer .implementation-deliverables {

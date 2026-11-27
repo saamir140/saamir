@@ -212,7 +212,7 @@ const applicationCard = intakeOpen
 const pages = {
   "": [
     "Ecommerce Growth Strategist | 45-Day Growth Sprint – Samir Liaquat",
-    hero + pain + homeSprint + selected + applicationCard + packageCard,
+    hero + homeSprint + selected + applicationCard + pain + packageCard,
   ],
   process: [
     "The growth method",
