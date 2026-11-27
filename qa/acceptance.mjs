@@ -19,6 +19,7 @@ try{
    const response=await page.goto(origin+route);
    assert.equal(response.status(),route==="/missing-page"?404:200);
    await page.evaluate(()=>document.fonts.ready);
+   assert.equal(await page.evaluate(()=>getComputedStyle(document.body).backgroundColor),"rgb(9, 10, 11)");
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),width+"px "+route+" overflows");
    if(width===390||width===1440){
     await page.addScriptTag({path:require.resolve("axe-core/axe.min.js")});
@@ -36,6 +37,8 @@ try{
  assert.equal(await menu.getAttribute("aria-expanded"),"true");await page.keyboard.press("Escape");assert.equal(await menu.getAttribute("aria-expanded"),"false");assert.ok(await menu.evaluate(el=>el===document.activeElement));
  assert.deepEqual(await page.locator("main > section").evaluateAll(nodes=>nodes.map(n=>n.id)),["home","problems","sprint","work","offer"]);
  assert.equal(await page.locator("#offer .terms-card strong").innerText(),"$500 USD");
+ assert.equal(await page.locator("#work .result-value").count(),6);
+ assert.match(await page.locator("#work").innerText(),/8.79% CTR \(all\)/);
  await page.locator('[data-place="hero"]').click();assert.equal(new URL(page.url()).hash,"#offer");
  await page.goto(origin+"/process");
  const firstFAQ=page.locator("#faq summary").first();await firstFAQ.focus();await page.keyboard.press("Enter");assert.ok(await firstFAQ.evaluate(el=>el.parentElement.open));

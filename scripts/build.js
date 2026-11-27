@@ -23,7 +23,7 @@ const cta = (place = "section") =>
 const mark =
   '<span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>';
 const brand = `<a class="brand" aria-label="Samir Liaquat home" href="/">${mark}Samir Liaquat<span>.</span></a>`;
-const nav = `<header id="nav"><div class="wrap nav">${brand}<button class="toggle" aria-expanded="false" aria-controls="links">Menu</button><nav id="links" aria-label="Main navigation"><a href="/about">About Samir</a><a href="/#problems">Approach</a><a href="/#sprint">45-Day Sprint</a><a href="/#work">Client work</a>${cta("navigation")}</nav></div></header>`;
+const nav = `<header id="nav"><div class="wrap nav">${brand}<button class="toggle" aria-expanded="false" aria-controls="links">Menu</button><nav id="links" aria-label="Main navigation"><a href="/about">About Samir</a><a href="/#problems">Approach</a><a href="/#sprint">45-Day Sprint</a><a href="/#work">Client results</a>${cta("navigation")}</nav></div></header>`;
 const footer = `<footer><div class="wrap foot">${brand}<span>© ${new Date().getUTCFullYear()} Samir Liaquat</span><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/apply">Contact</a></div></footer>`;
 const label = (s) => `<div class="label"><b></b>${s}</div>`;
 const lead = (tag, title, desc = "") =>
@@ -77,7 +77,7 @@ function workCards(filter = false) {
       (brief) => !approved.some((item) => item.slug === brief.slug),
     ),
   ];
-  const cards = (filter ? records : records.slice(0, 3))
+  const cards = (filter ? records : records.slice(0, 6))
     .map((x) => {
       const brief = projectBriefs.includes(x),
         title = brief ? x.title : x.clientDisplayName;
@@ -89,14 +89,14 @@ function workCards(filter = false) {
         x.metricDefinition &&
         x.metricValue != null;
       const detail = brief
-        ? `<dl class="brief-detail"><dt>Approach</dt><dd>${esc(x.work)}</dd><dt>Source</dt><dd>${esc(x.evidence)}</dd><dt>What the record supports</dt><dd>${esc(x.status)}</dd></dl>`
+        ? `<dl class="brief-detail"><dt>Approach</dt><dd>${esc(x.work)}</dd><dt>Source</dt><dd>${esc(x.evidence)}</dd>${x.readings ? `<dt>Source details</dt><dd><ul>${x.readings.map(([label, value]) => `<li>${esc(label)} · ${esc(value)}</li>`).join("")}</ul></dd>` : ""}<dt>What the record supports</dt><dd>${esc(x.status)}</dd></dl>`
         : `<p>${esc(x.diagnosis)}</p><ul>${x.scope
             .slice(0, 3)
             .map((s) => "<li>" + esc(s) + "</li>")
             .join(
               "",
             )}</ul><p>${esc(x.approach.join(" "))}</p><p>${esc(x.outcomeText)}</p><p>${esc(x.evidenceType)} · ${esc(x.disclaimer)}</p>${metric ? `<strong>${esc(x.metricValue)} ${esc(x.metricLabel)} · ${esc(x.metricPeriod)}</strong><p>${esc(x.metricDefinition)}</p>` : ""}`;
-      return `<article id="${filter ? "work" : "featured"}-${esc(x.slug)}" class="card workcard" data-cat="${esc(x.category)}">${brief ? `<img class="project-image" src="/assets/projects/${esc(x.image)}.webp" alt="" width="600" height="360" loading="lazy">` : ""}<div class="project-copy"><small>${esc(x.category)}</small><h3>${esc(title)}</h3>${filter ? `<p>${esc(x.challenge)}</p>` : ""}${filter ? `<details><summary>Read project notes</summary>${detail}</details>` : `<a class="textlink" href="/case-studies#work-${esc(x.slug)}">Explore project</a>`}</div></article>`;
+      return `<article id="${filter ? "work" : "featured"}-${esc(x.slug)}" class="card workcard" data-cat="${esc(x.category)}">${brief ? `<img class="project-image" src="/assets/projects/${esc(x.image)}.webp" alt="" width="600" height="360" loading="lazy">` : ""}<div class="project-copy"><small>${esc(brief ? x.attribution : x.category)}</small>${brief ? `<strong class="result-value">${esc(x.headline)}</strong>` : ""}<h3>${esc(title)}</h3>${brief && x.slug === "messaging-acquisition" ? '<p class="result-note">PKR 25,000 sales · reported by Samir</p>' : ""}${filter ? `<p>${esc(x.challenge)}</p>` : ""}${filter ? `<details><summary>Read project notes</summary>${detail}</details>` : `<a class="textlink" href="/case-studies#work-${esc(x.slug)}">Explore project</a>`}</div></article>`;
     })
     .join("");
   return `${filter ? `<div class="filters" aria-label="Filter work">${["All", ...categories].map((x, i) => `<button data-filter="${x}" aria-pressed="${!i}">${x}</button>`).join("")}</div>` : ""}<div class="grid ${filter ? "two" : "three"}">${cards}</div><p class="empty" hidden>No work examples in this category.</p>`;
@@ -104,7 +104,11 @@ function workCards(filter = false) {
 const selected = section(
   "work",
   "",
-  lead("Client work", "From the client project files.") +
+  lead(
+    "Client results",
+    "Campaign results & brand launches.",
+    "Campaign dashboard readings, sales reported by Samir, and launches in progress. Open a project for the source and scope.",
+  ) +
     workCards() +
     '<a class="textlink library-link" href="/case-studies">Explore all seven project briefs</a>' +
     testimonials
@@ -227,7 +231,7 @@ const pages = {
     inner(
       "Work library",
       "Growth work by discipline.",
-      `<p>Seven anonymized project briefs, with the challenge, approach and evidence for each. Project images are editorial illustrations.</p>${workCards(true)}`,
+      `<p>Seven project briefs with campaign metrics, reported sales and launch status. Source details are included in each brief. Cover photos are editorial illustrations.</p>${workCards(true)}`,
     ) + final,
   ],
   apply: [
@@ -303,7 +307,7 @@ for (const [slug, [title, body]] of Object.entries(pages)) {
         }
       : {}),
   });
-  const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(desc)}"><meta name="robots" content="${live && !["404", "apply", "thank-you", "case-studies"].includes(slug) ? "index,follow" : "noindex,follow"}"><link rel="canonical" href="${origin + path}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:image" content="${origin}/assets/share.png"><script type="application/ld+json">${schema}</script><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/style.css"><script defer src="/script.js"></script></head><body><a href="#main" class="skip">Skip to content</a>${nav}<main id="main">${body}</main>${footer}</body></html>`;
+  const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="theme-color" content="#090a0b"><meta name="color-scheme" content="dark"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(desc)}"><meta name="robots" content="${live && !["404", "apply", "thank-you", "case-studies"].includes(slug) ? "index,follow" : "noindex,follow"}"><link rel="canonical" href="${origin + path}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:image" content="${origin}/assets/share.png"><script type="application/ld+json">${schema}</script><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/style.css"><script defer src="/script.js"></script></head><body><a href="#main" class="skip">Skip to content</a>${nav}<main id="main">${body}</main>${footer}</body></html>`;
   await writeFile("dist/" + (slug || "index") + ".html", html);
 }
 await writeFile(
