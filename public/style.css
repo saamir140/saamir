@@ -1761,3 +1761,19 @@ nav .button:hover {
       0 0 8px color-mix(in srgb, var(--signal-color) 32%, transparent);
   }
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  .consulting-funnel .signal-link,
+  .consulting-funnel #work > .label {
+    animation: signal-shine 3.2s ease-out infinite;
+  }
+  .consulting-funnel .signal-link:is(:hover,:focus-visible) {
+    animation-play-state: paused;
+  }
+}
+@keyframes signal-shine {
+  0%, 32%, 100% {text-shadow: none}
+  8% {text-shadow: 0 0 9px color-mix(in srgb,currentColor 55%,transparent)}
+  15% {text-shadow: none}
+  21% {text-shadow: 0 0 6px color-mix(in srgb,currentColor 40%,transparent)}
+}
