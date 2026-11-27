@@ -20,7 +20,7 @@ try{
    assert.equal(response.status(),route==="/missing-page"?404:200);
    await page.evaluate(()=>document.fonts.ready);
    assert.equal(await page.evaluate(()=>getComputedStyle(document.body).backgroundColor),"rgb(9, 10, 11)");
-   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),width+"px "+route+" overflows");
+   assert.deepEqual(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth?[]:[...document.querySelectorAll("body *")].filter(el=>el.getBoundingClientRect().right>innerWidth+1).slice(0,12).map(el=>[el.tagName,el.className,Math.round(el.getBoundingClientRect().right)])),[],width+"px "+route+" overflows");
    if(width===390||width===1440){
     await page.addScriptTag({path:require.resolve("axe-core/axe.min.js")});
     const failures=await page.evaluate(async()=> (await axe.run(document,{runOnly:{type:"tag",values:["wcag2a","wcag2aa","wcag21aa"]}})).violations.map(v=>({id:v.id,impact:v.impact,selector:v.nodes[0].target})));

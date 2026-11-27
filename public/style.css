@@ -1293,6 +1293,7 @@ a.button:hover {
 }
 .consulting-funnel {
   width: min(936px, calc(100% - 48px));
+  grid-template-columns: minmax(0, 1fr);
   margin: 24px auto 40px;
   display: grid;
   gap: 14px;
@@ -1542,6 +1543,7 @@ nav .button:hover {
   white-space: nowrap;
 }
 .consulting-funnel .funnel-card h2 {
+  overflow-wrap: anywhere;
   font:
     650 clamp(1.55rem, 2.8vw, 2.25rem)/1.16 Inter,
     system-ui,
@@ -1614,3 +1616,5 @@ nav .button:hover {
     padding: 8px 10px;
   }
 }
+
+@media(max-width: 359px){.nav .mark{display:none}.funnel-metrics div{flex-wrap:wrap}.week summary>span:last-child{min-width:0;overflow-wrap:anywhere}}
