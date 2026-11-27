@@ -35,7 +35,9 @@ try{
  const menu=page.getByRole("button",{name:"Menu"});await menu.focus();await page.keyboard.press("Enter");
  assert.equal(await menu.getAttribute("aria-expanded"),"true");await page.keyboard.press("Escape");assert.equal(await menu.getAttribute("aria-expanded"),"false");assert.ok(await menu.evaluate(el=>el===document.activeElement));
  const firstFAQ=page.locator("#faq summary").first();await firstFAQ.focus();await page.keyboard.press("Enter");assert.ok(await firstFAQ.evaluate(el=>el.parentElement.open));
- await page.getByRole("button",{name:"Acquisition",exact:true}).click();assert.equal(await page.locator("#additional-work [data-cat]:visible").count(),1);
+ await page.getByRole("button",{name:"Acquisition",exact:true}).click();assert.equal(await page.locator("#additional-work [data-cat]:visible").count(),3);
+ assert.equal(await page.locator("#additional-work .project-image").count(),7);
+ assert.equal(await page.locator("#method .step-image").count(),6);
  await page.locator('[data-place="hero"]').click();assert.equal(new URL(page.url()).pathname,"/apply");
  for(const [key,value] of Object.entries({full_name:"Test Founder",email:"qa@example.test",brand:"Example",store_url:"https://example.test",market:"Test market",category:"Home",goal:"Identify where the buying journey breaks down."}))await page.locator('[name="'+key+'"]').fill(value);
  for(const key of ["platform","stage","bottleneck"])await page.locator('[name="'+key+'"]').selectOption({index:1});
