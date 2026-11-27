@@ -44,7 +44,7 @@ try{
  assert.equal(await page.locator(".funnel-card").evaluateAll(cards=>new Set(cards.map(c=>getComputedStyle(c).backgroundColor)).size),5);
  const menu=page.getByRole("button",{name:"Menu"});await menu.focus();await page.keyboard.press("Enter");
  assert.equal(await menu.getAttribute("aria-expanded"),"true");await page.keyboard.press("Escape");assert.equal(await menu.getAttribute("aria-expanded"),"false");assert.ok(await menu.evaluate(el=>el===document.activeElement));
- assert.deepEqual(await page.locator("main > section").evaluateAll(nodes=>nodes.map(n=>n.id)),["home","problems","sprint","work","offer"]);
+ assert.deepEqual(await page.locator("main > section").evaluateAll(nodes=>nodes.map(n=>n.id)),["home","sprint","work","problems","offer"]);
  assert.equal(await page.locator("#problems .funnel-inclusions li").count(),3);
  assert.equal(await page.locator("#sprint details.week").count(),7);
  const handoff=page.locator("#sprint details.week").last();
