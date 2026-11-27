@@ -42,6 +42,13 @@ try{
  await sticky.click();assert.equal(new URL(page.url()).pathname,"/apply");
  await page.setViewportSize({width:390,height:844});await page.goto(origin);
  assert.equal(await page.locator(".funnel-card").evaluateAll(cards=>new Set(cards.map(c=>getComputedStyle(c).backgroundColor)).size),5);
+ const signals=page.locator("main .signal-link,main .signal-cta");
+ assert.equal(await signals.count(),4);
+ await page.emulateMedia({reducedMotion:"no-preference"});
+ assert.equal(await signals.last().evaluate(el=>getComputedStyle(el).animationName),"signal-beat");
+ await page.emulateMedia({reducedMotion:"reduce"});
+ assert.equal(await signals.last().evaluate(el=>getComputedStyle(el).animationName),"none");
+ await page.emulateMedia({reducedMotion:"no-preference"});
  const menu=page.getByRole("button",{name:"Menu"});await menu.focus();await page.keyboard.press("Enter");
  assert.equal(await menu.getAttribute("aria-expanded"),"true");await page.keyboard.press("Escape");assert.equal(await menu.getAttribute("aria-expanded"),"false");assert.ok(await menu.evaluate(el=>el===document.activeElement));
  assert.deepEqual(await page.locator("main > section").evaluateAll(nodes=>nodes.map(n=>n.id)),["home","sprint","work","problems","offer"]);

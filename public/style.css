@@ -1286,9 +1286,9 @@ a.button:hover {
 
 /* A single column keeps the offer, evidence, scope and application in reading order. */
 :root {
-  --teal: #9dcbff;
-  --brand: #81b6f7;
-  --focus: #c6e4ff;
+  --teal: #9af2c8;
+  --brand: #76d7a9;
+  --focus: #e2cdff;
 }
 .consulting-funnel {
   width: min(936px, calc(100% - 48px));
@@ -1305,9 +1305,9 @@ a.button:hover {
   scroll-margin-top: 84px;
 }
 .consulting-funnel #home {
-  --card-surface: #151a21;
-  --card-edge: #364351;
-  --card-accent: #9dcbff;
+  --card-surface: #112c26;
+  --card-edge: #365e50;
+  --card-accent: #9af2c8;
 }
 .consulting-funnel h1,
 .consulting-funnel h2,
@@ -1370,25 +1370,25 @@ a.button:hover {
   padding-block: 9px;
 }
 .consulting-funnel #problems {
-  --card-surface: #1b202a;
-  --card-edge: #3b4657;
-  --card-accent: #c4d4e9;
+  --card-surface: #22212c;
+  --card-edge: #51495e;
+  --card-accent: #d6c4e9;
 }
 .consulting-funnel #sprint {
-  --card-surface: #14212a;
-  --card-edge: #304b5a;
-  --card-accent: #a4d5e9;
+  --card-surface: #25213e;
+  --card-edge: #574d80;
+  --card-accent: #d6c6ff;
 }
 .consulting-funnel #work {
-  --card-surface: #191e30;
-  --card-edge: #394365;
-  --card-accent: #bdcafa;
+  --card-surface: #143b34;
+  --card-edge: #316f5e;
+  --card-accent: #a1ffdb;
   background: var(--card-surface);
 }
 .consulting-funnel #offer {
-  --card-surface: #142642;
-  --card-edge: #486e9f;
-  --card-accent: #a6d1ff;
+  --card-surface: #332041;
+  --card-edge: #805998;
+  --card-accent: #e5bdff;
 }
 .consulting-funnel section#application {
   --card-surface: #17242c;
@@ -1479,7 +1479,7 @@ a.button:hover {
 }
 .consulting-funnel .button:hover,
 nav .button:hover {
-  background: #c5e1ff;
+  background: #c4ffe1;
 }
 @media (max-width: 639px) {
   .consulting-funnel {
@@ -1583,7 +1583,7 @@ nav .button:hover {
   color: #c0cad9;
 }
 .consulting-funnel .funnel-metrics div {
-  background: #212940;
+  background: #182c27;
   border-color: var(--card-edge);
 }
 .consulting-funnel .funnel-metrics dd,
@@ -1673,11 +1673,11 @@ nav .button:hover {
   margin: 0 0 7px;
 }
 #offer .offer-action .button {
-  background: #a6d1ff;
-  color: #0c203a;
+  background: #e5bdff;
+  color: #2b1636;
 }
 #offer .offer-action .button:hover {
-  background: #cbe5ff;
+  background: #f2dfff;
 }
 @media (max-width: 639px) {
   #offer .implementation-deliverables {
@@ -1686,5 +1686,78 @@ nav .button:hover {
   }
   #offer .offer-action .button {
     width: 100%;
+  }
+}
+
+.consulting-funnel .label,
+.consulting-funnel .week-date small {
+  color: var(--card-accent);
+}
+.consulting-funnel #work .label {
+  color: #eed0ff;
+}
+.consulting-funnel #work .project-copy small {
+  color: #a8f1d2;
+}
+.consulting-funnel .signal-link {
+  --signal-color: var(--card-accent);
+  color: var(--signal-color);
+  font-weight: 680;
+  gap: 0.55rem;
+  text-decoration-thickness: 1px;
+}
+.consulting-funnel #home .signal-link {
+  --signal-color: #dfc5ff;
+}
+.signal-link::before {
+  content: "";
+  display: block;
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+#offer .signal-cta {
+  --signal-color: var(--card-accent);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .signal-link::before,
+  .signal-cta,
+  #work > .label b {
+    animation: signal-beat 3.2s ease-out infinite;
+  }
+  #work > .label b {
+    --signal-color: #eed0ff;
+  }
+  .signal-link:hover::before,
+  .signal-link:focus-visible::before,
+  .signal-cta:hover,
+  .signal-cta:focus-visible {
+    animation-play-state: paused;
+  }
+}
+@keyframes signal-beat {
+  0%,
+  32%,
+  100% {
+    box-shadow:
+      0 0 0 0 transparent,
+      0 0 0 transparent;
+  }
+  8% {
+    box-shadow:
+      0 0 0 3px color-mix(in srgb, var(--signal-color) 30%, transparent),
+      0 0 12px color-mix(in srgb, var(--signal-color) 42%, transparent);
+  }
+  15% {
+    box-shadow:
+      0 0 0 1px transparent,
+      0 0 3px transparent;
+  }
+  21% {
+    box-shadow:
+      0 0 0 2px color-mix(in srgb, var(--signal-color) 22%, transparent),
+      0 0 8px color-mix(in srgb, var(--signal-color) 32%, transparent);
   }
 }
