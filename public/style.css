@@ -1301,14 +1301,16 @@ a.button:hover {
   gap: 14px;
 }
 .consulting-funnel .funnel-card {
-  background: #121414;
-  border: 1px solid #343936;
-  border-radius: 18px;
+  background: var(--card-surface);
+  border: 1px solid var(--card-edge);
+  border-radius: 20px;
   padding: clamp(22px, 3.5vw, 42px);
   scroll-margin-top: 84px;
 }
 .consulting-funnel #home {
-  background: linear-gradient(115deg, #1c211c, #111413 65%);
+  --card-surface: #182019;
+  --card-edge: #394c39;
+  --card-accent: #c2ee83;
 }
 .consulting-funnel h1,
 .consulting-funnel h2,
@@ -1370,9 +1372,31 @@ a.button:hover {
 .consulting-funnel .week summary {
   padding-block: 9px;
 }
-.consulting-funnel #work,
 .consulting-funnel #problems {
-  background: #121414;
+  --card-surface: #201c19;
+  --card-edge: #4a3830;
+  --card-accent: #edbb94;
+}
+.consulting-funnel #sprint {
+  --card-surface: #151d25;
+  --card-edge: #304459;
+  --card-accent: #a4c9ef;
+}
+.consulting-funnel #work {
+  --card-surface: #1e1925;
+  --card-edge: #46384e;
+  --card-accent: #d2b5e9;
+  background: var(--card-surface);
+}
+.consulting-funnel #offer {
+  --card-surface: #212017;
+  --card-edge: #4e4931;
+  --card-accent: #e7d793;
+}
+.consulting-funnel #application {
+  --card-surface: #14221c;
+  --card-edge: #304c3b;
+  --card-accent: #acdec0;
 }
 .funnel-metrics {
   display: grid;
@@ -1454,7 +1478,7 @@ a.button:hover {
   margin: 0;
 }
 .consulting-funnel #application {
-  border-left: 3px solid var(--teal);
+  border-left: 3px solid var(--card-accent);
 }
 .consulting-funnel .button:hover,
 nav .button:hover {
@@ -1504,5 +1528,92 @@ nav .button:hover {
   }
   .funnel-metrics dd {
     white-space: nowrap;
+  }
+}
+
+/* Keep the application action in the header, including when the mobile menu is closed. */
+.nav {
+  gap: 20px;
+}
+.nav nav {
+  margin-left: auto;
+}
+.sticky-apply {
+  flex: none;
+  border-radius: 999px;
+  min-height: 44px;
+  white-space: nowrap;
+}
+.consulting-funnel .funnel-card h2 {
+  font:
+    650 clamp(1.55rem, 2.8vw, 2.25rem)/1.16 Inter,
+    system-ui,
+    sans-serif;
+  letter-spacing: -0.04em;
+}
+.consulting-funnel .label,
+.consulting-funnel .week-date {
+  color: var(--card-accent);
+}
+.consulting-funnel .funnel-card h2::before {
+  content: "";
+  display: inline-block;
+  vertical-align: 0.13em;
+  margin-right: 0.45em;
+  width: 0.44em;
+  height: 0.44em;
+  border: 2px solid var(--card-accent);
+  border-radius: 3px;
+}
+.consulting-funnel #work h2::before,
+.consulting-funnel #application h2::before {
+  border-radius: 50%;
+}
+.consulting-funnel #offer h2::before {
+  transform: rotate(45deg);
+}
+.consulting-funnel .funnel-inclusions strong,
+.consulting-funnel .week summary > span:last-child {
+  font-size: 1.06rem;
+  font-weight: 650;
+}
+.consulting-funnel .evidence-note,
+.consulting-funnel .funnel-metrics dt,
+.funnel-price span {
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: #c1c9c5;
+}
+.consulting-funnel .funnel-metrics div {
+  background: #29232e;
+  border-color: var(--card-edge);
+}
+.consulting-funnel .funnel-metrics dd,
+.consulting-funnel .funnel-price strong {
+  color: var(--card-accent);
+}
+@media (max-width: 1023px) {
+  .nav .toggle {
+    margin-left: auto;
+  }
+  .nav {
+    gap: 10px;
+  }
+}
+@media (max-width: 480px) {
+  .wrap.nav {
+    width: calc(100% - 20px);
+    gap: 6px;
+  }
+  .nav .brand {
+    font-size: 1.05rem;
+  }
+  .nav .mark {
+    margin-right: 6px;
+  }
+  .nav .toggle,
+  .nav .sticky-apply {
+    font-size: 0.875rem;
+    padding: 8px 10px;
   }
 }

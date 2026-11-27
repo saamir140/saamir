@@ -33,6 +33,15 @@ try{
  await page.goto(origin);
  await page.keyboard.press("Tab");
  assert.equal(await page.locator(":focus").innerText(),"Skip to content");
+ const sticky=page.locator("header .sticky-apply");
+ for(const width of [320,390,1440]){
+  await page.setViewportSize({width,height:844});await page.evaluate(()=>scrollTo(0,document.body.scrollHeight));
+  const box=await sticky.boundingBox();assert.ok(box&&box.y>=0&&box.y+box.height<=90&&box.x>=0&&box.x+box.width<=width);
+ }
+ assert.equal(await sticky.innerText(),"Audit status");
+ await sticky.click();assert.equal(new URL(page.url()).pathname,"/apply");
+ await page.setViewportSize({width:390,height:844});await page.goto(origin);
+ assert.equal(await page.locator(".funnel-card").evaluateAll(cards=>new Set(cards.map(c=>getComputedStyle(c).backgroundColor)).size),6);
  const menu=page.getByRole("button",{name:"Menu"});await menu.focus();await page.keyboard.press("Enter");
  assert.equal(await menu.getAttribute("aria-expanded"),"true");await page.keyboard.press("Escape");assert.equal(await menu.getAttribute("aria-expanded"),"false");assert.ok(await menu.evaluate(el=>el===document.activeElement));
  assert.deepEqual(await page.locator("main > section").evaluateAll(nodes=>nodes.map(n=>n.id)),["home","problems","sprint","work","offer","application"]);
