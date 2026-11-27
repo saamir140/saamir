@@ -24,7 +24,7 @@ const cta = (place = "section") =>
 const mark =
   '<span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>';
 const brand = `<a class="brand" aria-label="Samir Liaquat home" href="/">${mark}Samir Liaquat<span>.</span></a>`;
-const nav = `<header id="nav"><div class="wrap nav">${brand}<button class="toggle" aria-expanded="false" aria-controls="links">Menu</button><nav id="links" aria-label="Main navigation"><a href="/about">About Samir</a><a href="/#sprint">Plan</a><a href="/#work">Results</a><a class="button" href="/#offer">Sprint pricing</a></nav></div></header>`;
+const nav = `<header id="nav"><div class="wrap nav">${brand}<button class="toggle" aria-expanded="false" aria-controls="links">Menu</button><nav id="links" aria-label="Main navigation"><a href="/about">About Samir</a><a href="/#sprint">Plan</a><a href="/#work">Results</a><a href="/#offer">Pricing</a></nav><a class="button sticky-apply" href="/apply" data-place="sticky-header">${process.env.INTAKE_ENABLED === "true" ? "Apply now" : "Audit status"}</a></div></header>`;
 const footer = `<footer><div class="wrap foot">${brand}<span>© ${new Date().getUTCFullYear()} Samir Liaquat</span><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/apply">Contact</a></div></footer>`;
 const label = (s) => `<div class="label"><b></b>${s}</div>`;
 const lead = (tag, title, desc = "") =>

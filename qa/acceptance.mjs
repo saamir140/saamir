@@ -20,7 +20,7 @@ try{
    assert.equal(response.status(),route==="/missing-page"?404:200);
    await page.evaluate(()=>document.fonts.ready);
    assert.equal(await page.evaluate(()=>getComputedStyle(document.body).backgroundColor),"rgb(9, 10, 11)");
-   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),width+"px "+route+" overflows");
+   assert.deepEqual(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth?[]:[...document.querySelectorAll("body *")].filter(el=>el.getBoundingClientRect().right>innerWidth+1).slice(0,12).map(el=>[el.tagName,el.className,Math.round(el.getBoundingClientRect().right)])),[],width+"px "+route+" overflows");
    if(width===390||width===1440){
     await page.addScriptTag({path:require.resolve("axe-core/axe.min.js")});
     const failures=await page.evaluate(async()=> (await axe.run(document,{runOnly:{type:"tag",values:["wcag2a","wcag2aa","wcag21aa"]}})).violations.map(v=>({id:v.id,impact:v.impact,selector:v.nodes[0].target})));
@@ -33,6 +33,15 @@ try{
  await page.goto(origin);
  await page.keyboard.press("Tab");
  assert.equal(await page.locator(":focus").innerText(),"Skip to content");
+ const sticky=page.locator("header .sticky-apply");
+ for(const width of [320,390,1440]){
+  await page.setViewportSize({width,height:844});await page.evaluate(()=>scrollTo(0,document.body.scrollHeight));
+  const box=await sticky.boundingBox();assert.ok(box&&box.y>=0&&box.y+box.height<=90&&box.x>=0&&box.x+box.width<=width);
+ }
+ assert.equal(await sticky.innerText(),"Audit status");
+ await sticky.click();assert.equal(new URL(page.url()).pathname,"/apply");
+ await page.setViewportSize({width:390,height:844});await page.goto(origin);
+ assert.equal(await page.locator(".funnel-card").evaluateAll(cards=>new Set(cards.map(c=>getComputedStyle(c).backgroundColor)).size),6);
  const menu=page.getByRole("button",{name:"Menu"});await menu.focus();await page.keyboard.press("Enter");
  assert.equal(await menu.getAttribute("aria-expanded"),"true");await page.keyboard.press("Escape");assert.equal(await menu.getAttribute("aria-expanded"),"false");assert.ok(await menu.evaluate(el=>el===document.activeElement));
  assert.deepEqual(await page.locator("main > section").evaluateAll(nodes=>nodes.map(n=>n.id)),["home","problems","sprint","work","offer","application"]);
