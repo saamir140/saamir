@@ -4,10 +4,10 @@ import {
   phases,
   faqs,
   approved,
-  examples,
   categories,
   testimonials,
 } from "../src/content.js";
+import { projectBriefs } from "../src/project-briefs.js";
 import { fields } from "../lib/fields.js";
 const esc = (s) =>
   String(s).replace(
@@ -74,53 +74,35 @@ const system = section(
     "One connected growth system.",
     "Each step produces something you can use to make a decision.",
   ) +
-    `<div class="grid three method">${method.map(([step, title, desc, out], i) => `<article><small>0${i + 1} / ${step}</small><h3>${title}</h3><p>${desc}</p><strong>${out}</strong></article>`).join("")}</div>`,
+    `<div class="grid three method">${method.map(([step, title, desc, out], i) => `<article class="step-card"><img class="step-image" src="/assets/method/${step.toLowerCase()}.webp" alt="" width="640" height="208" loading="lazy"><div class="step-body"><small>0${i + 1} / ${step}</small><h3>${title}</h3><p>${desc}</p><strong>${out}</strong></div></article>`).join("")}</div>`,
 );
 function workCards(filter = false) {
-  const samples = examples.map(([category, title, challenge], i) => ({
-    category,
-    title,
-    challenge,
-    slug: ["creative-review", "product-diagnosis", "launch-brief"][i],
-    steps: [
-      [
-        "Read the ad alongside the landing page.",
-        "Mark the first place where the promise changes.",
-        "Test one aligned headline and review downstream purchase intent.",
-      ],
-      [
-        "Read a product page in the order a first-time buyer sees it.",
-        "Check product details, delivery costs and return information before checkout.",
-        "Choose a single friction point and record the test conditions.",
-      ],
-      [
-        "Write down the intended buyer, use case and strongest alternative.",
-        "Connect the product promise to the first buying journey.",
-        "Verify key events before opening paid acquisition.",
-      ],
-    ][i],
-  }));
-  const records = approved.length ? approved : samples;
+  const records = [
+    ...approved,
+    ...projectBriefs.filter(
+      (brief) => !approved.some((item) => item.slug === brief.slug),
+    ),
+  ];
   const cards = (filter ? records : records.slice(0, 3))
     .map((x) => {
-      const sample = !approved.length,
-        title = sample ? x.title : x.clientDisplayName;
+      const brief = projectBriefs.includes(x),
+        title = brief ? x.title : x.clientDisplayName;
       const metric =
-        !sample &&
+        !brief &&
         x.evidenceVerified &&
         x.evidenceType !== "projection" &&
         x.metricPeriod &&
         x.metricDefinition &&
         x.metricValue != null;
-      const detail = sample
-        ? x.steps.map((s) => `<p>${esc(s)}</p>`).join("")
+      const detail = brief
+        ? `<dl class="brief-detail"><dt>Approach</dt><dd>${esc(x.work)}</dd><dt>Source</dt><dd>${esc(x.evidence)}</dd><dt>What the record supports</dt><dd>${esc(x.status)}</dd></dl>`
         : `<p>${esc(x.diagnosis)}</p><ul>${x.scope
             .slice(0, 3)
             .map((s) => "<li>" + esc(s) + "</li>")
             .join(
               "",
             )}</ul><p>${esc(x.approach.join(" "))}</p><p>${esc(x.outcomeText)}</p><p>${esc(x.evidenceType)} · ${esc(x.disclaimer)}</p>${metric ? `<strong>${esc(x.metricValue)} ${esc(x.metricLabel)} · ${esc(x.metricPeriod)}</strong><p>${esc(x.metricDefinition)}</p>` : ""}`;
-      return `<article id="${filter ? "work" : "featured"}-${esc(x.slug)}" class="card workcard" data-cat="${esc(x.category)}"><small>${esc(x.category)}</small><h3>${esc(title)}</h3><p>${esc(x.challenge)}</p>${filter ? `<details><summary>Read ${sample ? "example" : "case"}</summary>${detail}</details>` : `<a class="textlink" href="/case-studies#work-${esc(x.slug)}">Explore ${sample ? "example" : "case"}</a>`}</article>`;
+      return `<article id="${filter ? "work" : "featured"}-${esc(x.slug)}" class="card workcard" data-cat="${esc(x.category)}">${brief ? `<img class="project-image" src="/assets/projects/${esc(x.image)}.webp" alt="" width="600" height="360" loading="lazy">` : ""}<div class="project-copy"><small>${esc(x.category)}</small><h3>${esc(title)}</h3><p>${esc(x.challenge)}</p>${filter ? `<details><summary>Read project notes</summary>${detail}</details>` : `<a class="textlink" href="/case-studies#work-${esc(x.slug)}">Explore project</a>`}</div></article>`;
     })
     .join("");
   return `${filter ? `<div class="filters" aria-label="Filter work">${["All", ...categories].map((x, i) => `<button data-filter="${x}" aria-pressed="${!i}">${x}</button>`).join("")}</div>` : ""}<div class="grid ${filter ? "two" : "three"}">${cards}</div><p class="empty" hidden>No work examples in this category.</p>`;
@@ -130,10 +112,8 @@ const selected = section(
   "",
   lead(
     "Selected work",
-    approved.length ? "Growth work in context." : "Inside a growth diagnosis.",
-    approved.length
-      ? "Explore the challenge, scope and evidence behind each project."
-      : "Illustrative process examples show how an engagement works. Client outcomes are shared only with permission.",
+    "Different businesses. One disciplined approach.",
+    "Selected project briefs from acquisition, conversion and launch work. Images are editorial illustrations. Each brief explains the scope and what the available evidence shows.",
   ) +
     workCards() +
     testimonials
@@ -152,7 +132,7 @@ const sprint = section(
     "Four phases. One accountable strategist.",
     "A defined engagement for operating stores and brands preparing to launch.",
   ) +
-    `<div class="grid four">${phases.map(([days, t, h, d, o]) => `<article><small>DAYS ${days}</small><h3>${t}</h3><p>${d}</p><strong>${o}</strong></article>`).join("")}</div><div class="scope"><div><h3>What’s included</h3><p>Research, funnel and offer review, a prioritized roadmap, agreed CRO, creative, tracking or campaign changes, and a documented handoff.</p></div><div><h3>What you bring</h3><p>A real product, decision-maker access, business context and the ability to act on tests. Pre-launch work focuses on foundations.</p></div><div><h3>Investment & boundaries</h3><p>Investment is scoped after a diagnostic call. Media spend, paid tools and production are separate unless agreed in writing.</p></div></div><div class="actions">${cta("offer")}<a href="/process#deliverables">Explore the full scope</a></div>`,
+    `<div class="grid four">${phases.map(([days, t, h, d, o], i) => `<article class="phase-card"><div class="phase-track" aria-hidden="true">${phases.map((_, j) => `<i class="${i === j ? "active" : ""}"></i>`).join("")}</div><small>DAYS ${days}</small><h3>${t}</h3><p>${d}</p><strong>${o}</strong></article>`).join("")}</div><div class="scope"><div><h3>What’s included</h3><p>Research, funnel and offer review, a prioritized roadmap, agreed CRO, creative, tracking or campaign changes, and a documented handoff.</p></div><div><h3>What you bring</h3><p>A real product, decision-maker access, business context and the ability to act on tests. Pre-launch work focuses on foundations.</p></div><div><h3>Investment & boundaries</h3><p>Investment is scoped after a diagnostic call. Media spend, paid tools and production are separate unless agreed in writing.</p></div></div><div class="actions">${cta("offer")}<a href="/process#deliverables">Explore the full scope</a></div>`,
 );
 const deliverables = section(
   "deliverables",
@@ -201,7 +181,11 @@ const bio = section(
 const more = section(
   "additional-work",
   "",
-  lead("Work library", "Explore the work by discipline.") + workCards(true),
+  lead(
+    "Project library",
+    "Explore the work by discipline.",
+    "Filter the seven project briefs to see the work behind each engagement.",
+  ) + workCards(true),
 );
 const faq = section(
   "faq",
@@ -259,7 +243,7 @@ const pages = {
     inner(
       "Work library",
       "Growth work by discipline.",
-      `<p>${approved.length ? "Approved project evidence and context." : "Explore illustrative examples of research, decisions and deliverables across three disciplines."}</p>${workCards(true)}`,
+      `<p>Seven anonymized project briefs, with the challenge, approach and evidence for each. Project images are editorial illustrations.</p>${workCards(true)}`,
     ) + final,
   ],
   apply: [
@@ -267,10 +251,11 @@ const pages = {
     inner(
       "Work with Samir",
       "Apply for a Growth Audit.",
-      process.env.VERCEL_ENV === "production" && process.env.INTAKE_ENABLED !== "true"
+      process.env.VERCEL_ENV === "production" &&
+        process.env.INTAKE_ENABLED !== "true"
         ? '<p>Growth Audit applications are currently closed.</p><a class="textlink" href="/#sprint">Explore the 45-Day Plan</a>'
         : "<p>The application is free. Share your business context so I can review fit and suggest a next step. Please leave out passwords and customer information.</p>" +
-        form,
+            form,
     ),
   ],
   "thank-you": [

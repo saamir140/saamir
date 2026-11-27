@@ -106,22 +106,5 @@ export const cases = [];
 export const approved = cases.filter(
   (x) => x.publicationApproved && x.confidentialityApproved,
 );
-export const examples = [
-  [
-    "Acquisition",
-    "Creative-to-offer review",
-    "Compare the promise in an ad with the first product-page screen. Document mismatches and draft one testable message.",
-  ],
-  [
-    "Growth management",
-    "Product-page diagnosis",
-    "Trace the buying decision from product details through shipping, returns and checkout. Rank friction by evidence and effort.",
-  ],
-  [
-    "Brand launch",
-    "Launch-readiness brief",
-    "Map the customer, offer, buying journey and tracking before launch. Agree on which signals will guide the first round of changes.",
-  ],
-];
 // Populate only after exact quote and attribution are cleared by the speaker.
 export const testimonials = [];

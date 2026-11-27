@@ -710,3 +710,136 @@ form [aria-invalid="true"] {
     line-height: 1.12;
   }
 }
+
+/* Material tones distinguish the work, while headings and day ranges carry meaning independently of colour. */
+#problems {
+  background: #fbf9f4;
+}
+#problems .card:nth-child(1),
+#deliverables .card:nth-child(3n + 1) {
+  background: #eaf4ed;
+}
+#problems .card:nth-child(2),
+#deliverables .card:nth-child(3n + 2) {
+  background: #fff1d6;
+}
+#problems .card:nth-child(3),
+#deliverables .card:nth-child(3n) {
+  background: #edeaf6;
+}
+#method {
+  background: #f0f3f2;
+}
+.method article.step-card {
+  border: 1px solid #cbd6d1;
+  padding: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+}
+.step-image,
+.project-image {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+}
+.step-image {
+  height: auto;
+}
+.step-body,
+.project-copy {
+  padding: 22px 24px;
+}
+.step-body h3 {
+  margin-top: 8px;
+}
+.step-body strong {
+  border-top: 1px solid var(--rule);
+  padding-top: 12px;
+}
+#work {
+  background: #fcf8ef;
+}
+.workcard.card {
+  padding: 0;
+  overflow: hidden;
+}
+.project-image {
+  aspect-ratio: 5/3;
+  height: auto;
+  background: #e6e9e2;
+}
+.project-copy h3 {
+  margin-top: 8px;
+}
+.project-copy .textlink {
+  margin-top: 8px;
+}
+.brief-detail {
+  margin: 0;
+}
+.brief-detail dt {
+  font-weight: 650;
+  margin: 12px 0 3px;
+}
+.brief-detail dd {
+  margin: 0;
+  color: var(--muted);
+}
+#additional-work {
+  background: #f0f3f7;
+}
+#additional-work .project-image,
+.inner .project-image {
+  aspect-ratio: 2.25;
+}
+#sprint .phase-card {
+  padding: 22px;
+  border: 0;
+  border-radius: 14px;
+  color: #152339;
+  background: var(--phase-surface);
+}
+.phase-card:nth-child(1) {
+  --phase-surface: #d4eae0;
+  --phase-ink: #21584c;
+}
+.phase-card:nth-child(2) {
+  --phase-surface: #f6e3b8;
+  --phase-ink: #6c4b1c;
+}
+.phase-card:nth-child(3) {
+  --phase-surface: #cfe4f3;
+  --phase-ink: #315069;
+}
+.phase-card:nth-child(4) {
+  --phase-surface: #e0ddf3;
+  --phase-ink: #504b74;
+}
+#sprint .phase-card h3 {
+  color: #142338;
+}
+#sprint .phase-card p {
+  color: #304151;
+}
+#sprint .phase-card small,
+.phase-card strong {
+  color: var(--phase-ink);
+}
+.phase-track {
+  display: grid;
+  grid-template-columns: 7fr 8fr 15fr 15fr;
+  gap: 4px;
+  margin-bottom: 22px;
+}
+.phase-track i {
+  height: 7px;
+  border: 1px solid var(--phase-ink);
+  border-radius: 4px;
+}
+.phase-track i.active {
+  background: var(--phase-ink);
+}
+#faq {
+  background: #f6f3ec;
+}
