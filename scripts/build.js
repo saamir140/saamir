@@ -1,0 +1,355 @@
+import { mkdir, writeFile, cp, rm } from "node:fs/promises";
+import {
+  method,
+  phases,
+  faqs,
+  approved,
+  examples,
+  categories,
+  testimonials,
+} from "../src/content.js";
+import { fields } from "../lib/fields.js";
+const esc = (s) =>
+  String(s).replace(
+    /[&<>"']/g,
+    (c) =>
+      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[
+        c
+      ],
+  );
+const cta = (place = "section") =>
+  `<a class="button" href="/apply" data-place="${place}">Apply for a Growth Audit</a>`;
+const mark =
+  '<span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>';
+const brand = `<a class="brand" aria-label="Samir Liaquat home" href="/">${mark}Samir Liaquat<span>.</span></a>`;
+const nav = `<header id="nav"><div class="wrap nav">${brand}<button class="toggle" aria-expanded="false" aria-controls="links">Menu</button><nav id="links" aria-label="Main navigation"><a href="/#work">Work</a><a href="/#method">Method</a><a href="/#sprint">45-Day Sprint</a><a href="/about">About</a><a href="/#faq">FAQs</a>${cta("navigation")}</nav></div></header>`;
+const footer = `<footer><div class="wrap foot">${brand}<span>© ${new Date().getUTCFullYear()} Samir Liaquat</span><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/apply">Contact</a></div></footer>`;
+const label = (s) => `<div class="label"><b></b>${s}</div>`;
+const lead = (tag, title, desc = "") =>
+  `${label(tag)}<h2>${title}</h2>${desc ? `<p class="intro">${desc}</p>` : ""}`;
+const section = (id, cls, content) =>
+  `<section class="block ${cls}" id="${id}"><div class="wrap">${content}</div></section>`;
+const icons = [
+  '<path d="M3 4h18l-7 8v6l-4 2v-8z"/>',
+  '<path d="M3 20h18M5 16l5-6 4 3 6-9M15 4h5v5"/>',
+  '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><path d="M7 14v4h4M14 7h4v4"/>',
+];
+const icon = (i) =>
+  `<span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">${icons[i]}</svg></span>`;
+const hero = `<section class="hero" id="home"><div class="wrap hero-grid"><div class="herocopy">${label("Independent ecommerce growth strategist")}<h1>Don’t Guess.<br><em>Diagnose.</em></h1><p>I’m Samir Liaquat. I help ecommerce founders find what’s holding growth back, then build and execute a focused <strong>45-day growth plan.</strong></p><div class="actions">${cta("hero")}<a class="textlink" href="#sprint">Explore the 45-Day Plan</a></div></div><figure><img src="/assets/diagnosis.webp" width="1100" height="1375" fetchpriority="high" alt="A strategy notebook with a hand-annotated ecommerce funnel"></figure></div></section>
+<div id="trust"><div class="wrap strip">${["Direct strategist access", "Decisions backed by testing", "Client-owned accounts"].map((x) => `<span><b aria-hidden="true">✓</b>${x}</span>`).join("")}</div></div>`;
+const pain = section(
+  "problems",
+  "",
+  lead(
+    "Growth diagnosis",
+    "Where growth gets stuck.",
+    "More traffic alone won’t fix a disconnected growth system. Start with the constraint that matters.",
+  ) +
+    `<div class="grid three">${[
+      [
+        "Visitors arrive, then leave",
+        "Unclear offers, unanswered objections and checkout friction can lose buyers who were ready to act.",
+      ],
+      [
+        "Spend grows faster than insight",
+        "Clicks tell only part of the story. Weak tracking makes it hard to see which campaigns attract buyers.",
+      ],
+      [
+        "Too many disconnected changes",
+        "Ads, offers and product pages send different messages. A shared roadmap puts the most important fix first.",
+      ],
+    ]
+      .map(
+        ([a, b], i) =>
+          `<article class="card">${icon(i)}<h3>${a}</h3><p>${b}</p></article>`,
+      )
+      .join("")}</div>`,
+);
+const system = section(
+  "method",
+  "cloud",
+  lead(
+    "The method",
+    "One connected growth system.",
+    "Each step produces something you can use to make a decision.",
+  ) +
+    `<div class="grid three method">${method.map(([step, title, desc, out], i) => `<article><small>0${i + 1} / ${step}</small><h3>${title}</h3><p>${desc}</p><strong>${out}</strong></article>`).join("")}</div>`,
+);
+function workCards(filter = false) {
+  const samples = examples.map(([category, title, challenge], i) => ({
+    category,
+    title,
+    challenge,
+    slug: ["creative-review", "product-diagnosis", "launch-brief"][i],
+    steps: [
+      [
+        "Read the ad alongside the landing page.",
+        "Mark the first place where the promise changes.",
+        "Test one aligned headline and review downstream purchase intent.",
+      ],
+      [
+        "Read a product page in the order a first-time buyer sees it.",
+        "Check product details, delivery costs and return information before checkout.",
+        "Choose a single friction point and record the test conditions.",
+      ],
+      [
+        "Write down the intended buyer, use case and strongest alternative.",
+        "Connect the product promise to the first buying journey.",
+        "Verify key events before opening paid acquisition.",
+      ],
+    ][i],
+  }));
+  const records = approved.length ? approved : samples;
+  const cards = (filter ? records : records.slice(0, 3))
+    .map((x) => {
+      const sample = !approved.length,
+        title = sample ? x.title : x.clientDisplayName;
+      const metric =
+        !sample &&
+        x.evidenceVerified &&
+        x.evidenceType !== "projection" &&
+        x.metricPeriod &&
+        x.metricDefinition &&
+        x.metricValue != null;
+      const detail = sample
+        ? x.steps.map((s) => `<p>${esc(s)}</p>`).join("")
+        : `<p>${esc(x.diagnosis)}</p><ul>${x.scope
+            .slice(0, 3)
+            .map((s) => "<li>" + esc(s) + "</li>")
+            .join(
+              "",
+            )}</ul><p>${esc(x.approach.join(" "))}</p><p>${esc(x.outcomeText)}</p><p>${esc(x.evidenceType)} · ${esc(x.disclaimer)}</p>${metric ? `<strong>${esc(x.metricValue)} ${esc(x.metricLabel)} · ${esc(x.metricPeriod)}</strong><p>${esc(x.metricDefinition)}</p>` : ""}`;
+      return `<article id="${filter ? "work" : "featured"}-${esc(x.slug)}" class="card workcard" data-cat="${esc(x.category)}"><small>${esc(x.category)}</small><h3>${esc(title)}</h3><p>${esc(x.challenge)}</p>${filter ? `<details><summary>Read ${sample ? "example" : "case"}</summary>${detail}</details>` : `<a class="textlink" href="/case-studies#work-${esc(x.slug)}">Explore ${sample ? "example" : "case"}</a>`}</article>`;
+    })
+    .join("");
+  return `${filter ? `<div class="filters" aria-label="Filter work">${["All", ...categories].map((x, i) => `<button data-filter="${x}" aria-pressed="${!i}">${x}</button>`).join("")}</div>` : ""}<div class="grid ${filter ? "two" : "three"}">${cards}</div><p class="empty" hidden>No work examples in this category.</p>`;
+}
+const selected = section(
+  "work",
+  "",
+  lead(
+    "Selected work",
+    approved.length ? "Growth work in context." : "Inside a growth diagnosis.",
+    approved.length
+      ? "Explore the challenge, scope and evidence behind each project."
+      : "Illustrative process examples show how an engagement works. Client outcomes are shared only with permission.",
+  ) +
+    workCards() +
+    testimonials
+      .filter((x) => x.publicationApproved && x.consentApproved)
+      .map(
+        (x) =>
+          `<blockquote><p>${esc(x.quote)}</p><cite>${esc(x.attribution)}</cite></blockquote>`,
+      )
+      .join(""),
+);
+const sprint = section(
+  "sprint",
+  "dark",
+  lead(
+    "45-Day Ecommerce Growth Sprint",
+    "Four phases. One accountable strategist.",
+    "A defined engagement for operating stores and brands preparing to launch.",
+  ) +
+    `<div class="grid four">${phases.map(([days, t, h, d, o]) => `<article><small>DAYS ${days}</small><h3>${t}</h3><p>${d}</p><strong>${o}</strong></article>`).join("")}</div><div class="scope"><div><h3>What’s included</h3><p>Research, funnel and offer review, a prioritized roadmap, agreed CRO, creative, tracking or campaign changes, and a documented handoff.</p></div><div><h3>What you bring</h3><p>A real product, decision-maker access, business context and the ability to act on tests. Pre-launch work focuses on foundations.</p></div><div><h3>Investment & boundaries</h3><p>Investment is scoped after a diagnostic call. Media spend, paid tools and production are separate unless agreed in writing.</p></div></div><div class="actions">${cta("offer")}<a href="/process#deliverables">Explore the full scope</a></div>`,
+);
+const deliverables = section(
+  "deliverables",
+  "",
+  lead(
+    "Scope of work",
+    "What gets reviewed.",
+    "These are possible workstreams. Your signed scope identifies what can be delivered during the sprint.",
+  ) +
+    `<div class="grid three">${[
+      [
+        "Store & conversion",
+        "Messaging, product detail pages, the cart and checkout friction.",
+      ],
+      [
+        "Paid acquisition",
+        "Campaign structure, intent, creative angles and landing-page fit.",
+      ],
+      [
+        "Offer & customer psychology",
+        "Positioning, objections, trust and purchase motivation.",
+      ],
+      [
+        "Content & funnel",
+        "Awareness, consideration and decision-stage content hypotheses.",
+      ],
+      [
+        "Brand & market",
+        "Competitive analysis, differentiation and message consistency.",
+      ],
+      [
+        "Measurement & iteration",
+        "Event quality, funnel reporting, test documentation and updates.",
+      ],
+    ]
+      .map(
+        ([a, b]) => `<article class="card"><h3>${a}</h3><p>${b}</p></article>`,
+      )
+      .join("")}</div>`,
+);
+const bio = section(
+  "about",
+  "mint",
+  `<div class="bio"><div>${label("About Samir")}<h2>A direct line to your growth strategist.</h2></div><div><p>I’m Samir Liaquat, an independent ecommerce growth strategist. I connect customer research, paid acquisition and the buying experience in one plan.</p><p>We decide what to change together. You see the priorities, the work in progress and what each test actually tells us.</p><a class="textlink" href="/about">Meet Samir</a></div></div>`,
+);
+const more = section(
+  "additional-work",
+  "",
+  lead("Work library", "Explore the work by discipline.") + workCards(true),
+);
+const faq = section(
+  "faq",
+  "cloud",
+  `<div class="faqgrid"><div>${lead("FAQs", "Before you apply.")}</div><div>${faqs.map(([q, a]) => `<details><summary>${q}</summary><p>${a}</p></details>`).join("")}</div></div>`,
+);
+const final = section(
+  "apply",
+  "",
+  `<div class="callout"><div>${label("Growth audit application")}<h2>Let’s find your next move.</h2><p>Tell me about your store and your biggest constraint. I’ll review the fit and follow up about the next step.</p></div>${cta("final")}</div>`,
+);
+function field([key, name, rule], i) {
+  const attr = `name="${key}" id="${key}" aria-describedby="err-${key}" ${i < 10 ? "required" : ""}`;
+  const control = Array.isArray(rule)
+    ? `<select ${attr}><option value="">Select an option</option>${rule.map((x) => `<option>${x}</option>`).join("")}</select>`
+    : key === "goal"
+      ? `<textarea ${attr} minlength="20" maxlength="1000" rows="4"></textarea>`
+      : `<input ${attr} type="${key === "email" ? "email" : key === "store_url" ? "url" : "text"}" maxlength="${rule}" ${key === "full_name" ? 'minlength="2" autocomplete="name"' : key === "email" ? 'autocomplete="email"' : key === "store_url" ? 'placeholder="https://"' : ""}>`;
+  return `<div class="field ${key === "goal" ? "wide" : ""}"><label for="${key}">${name}</label>${control}<small id="err-${key}"></small></div>`;
+}
+const form = `${process.env.INTAKE_ENABLED === "true" ? "" : '<p class="preview-note">Growth Audit applications are currently closed.</p>'}<form id="lead" action="/api/leads" method="post"><p id="status" role="alert" tabindex="-1"></p><fieldset><legend>Your store</legend><div class="fields">${fields.slice(0, 10).map(field).join("")}</div></fieldset><details><summary>Commercial context (optional)</summary><div class="fields">${fields
+  .slice(10)
+  .map((x, i) => field(x, i + 10))
+  .join(
+    "",
+  )}</div></details><div hidden><input name="company_fax" tabindex="-1" autocomplete="off"></div><label class="check"><input type="checkbox" name="privacy_consent" required aria-describedby="err-privacy_consent"> <span>I have read the <a href="/privacy" target="_blank" rel="noopener">privacy notice</a> and agree to the use of these details to review my application.</span></label><small id="err-privacy_consent"></small><button class="button" type="submit">Submit application</button><noscript><p>Enable JavaScript to submit securely.</p></noscript></form>`;
+const inner = (tag, h, body) =>
+  `<div class="wrap inner">${label(tag)}<h1>${h}</h1>${body}</div>`;
+const pages = {
+  "": [
+    "Ecommerce Growth Strategist | 45-Day Growth Sprint – Samir Liaquat",
+    hero + pain + system + selected + sprint + bio + more + faq + final,
+  ],
+  process: [
+    "The growth method",
+    inner(
+      "The growth method",
+      "From research to execution.",
+      "<p>Follow the decisions and outputs in a sprint.</p>",
+    ) +
+      system +
+      deliverables +
+      sprint,
+  ],
+  about: [
+    "About Samir Liaquat",
+    inner(
+      "Independent ecommerce growth strategist",
+      "Meet Samir Liaquat.",
+      "<p>I work directly with founders who want to understand why their store is underperforming and decide what to change first.</p><h2>How we work together</h2><p>We begin with customers, economics and the buying journey. I turn those findings into a short list of decisions, agree the scope with you and document what changes. You retain control of business accounts and approvals.</p><h2>Who the sprint suits</h2><p>Operating stores with traffic or sales signals, and pre-launch founders with a defined product and market. If you need guaranteed returns, instant results or an unscoped full rebuild, this engagement is unlikely to fit.</p>",
+    ) + final,
+  ],
+  "case-studies": [
+    "Work library",
+    inner(
+      "Work library",
+      "Growth work by discipline.",
+      `<p>${approved.length ? "Approved project evidence and context." : "Explore illustrative examples of research, decisions and deliverables across three disciplines."}</p>${workCards(true)}`,
+    ) + final,
+  ],
+  apply: [
+    "Apply for a Growth Audit",
+    inner(
+      "Work with Samir",
+      "Apply for a Growth Audit.",
+      process.env.VERCEL_ENV === "production" && process.env.INTAKE_ENABLED !== "true"
+        ? '<p>Growth Audit applications are currently closed.</p><a class="textlink" href="/#sprint">Explore the 45-Day Plan</a>'
+        : "<p>The application is free. Share your business context so I can review fit and suggest a next step. Please leave out passwords and customer information.</p>" +
+        form,
+    ),
+  ],
+  "thank-you": [
+    "Application status",
+    inner(
+      "Growth audit",
+      "Application status",
+      '<p id="confirmation">Your submission reference appears after a successful application.</p><a class="textlink" href="/">Back to home</a>',
+    ),
+  ],
+  privacy: [
+    "Application privacy notice",
+    inner(
+      "Website information",
+      "Application privacy notice.",
+      "<p>This form asks for contact details, store information, business goals and optional commercial ranges so Samir can assess fit and respond.</p><h2>Processing and access</h2><p>When intake is enabled, Vercel processes the request, a restricted Supabase database stores the application and Resend delivers the acknowledgment and review notification. A short-lived hashed network identifier is used to limit spam. No advertising pixels or marketing subscriptions are enabled.</p><h2>Your application</h2><p>Reply to the acknowledgment email to request access, correction or deletion. Include your application reference. Please do not include customer records or account credentials.</p>",
+    ),
+  ],
+  terms: [
+    "Website terms",
+    inner(
+      "Website information",
+      "Website terms.",
+      "<p>The information here describes a potential engagement. Submitting an application requests a fit review. It does not create a service agreement or reserve a start date.</p><h2>Engagement scope</h2><p>Deliverables, responsibilities, pricing, IP, confidentiality, cancellation and payment terms are agreed in writing before work begins. Examples illustrate the approach. Outcomes depend on the business and are not guaranteed.</p>",
+    ),
+  ],
+  404: [
+    "Page not found",
+    inner(
+      "404",
+      "Page not found.",
+      '<p>The page may have moved.</p><div class="actions"><a class="textlink" href="/">Back to home</a>' +
+        cta() +
+        "</div>",
+    ),
+  ],
+};
+const live = process.env.PUBLIC_LAUNCH === "approved",
+  origin = process.env.SITE_ORIGIN || "https://saamir.vercel.app";
+await rm("dist", { recursive: true, force: true });
+await mkdir("dist");
+await cp("public", "dist", { recursive: true });
+await cp("assets", "dist/assets", { recursive: true });
+for (const [slug, [title, body]] of Object.entries(pages)) {
+  const path = "/" + slug,
+    desc = slug
+      ? title + " | Samir Liaquat."
+      : "Ecommerce audits, CRO, acquisition strategy and focused 45-day implementation. Work directly with Samir to identify growth bottlenecks.";
+  const schema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": slug === "about" ? "ProfilePage" : "WebPage",
+    name: title,
+    url: origin + path,
+    ...(slug === "about"
+      ? {
+          mainEntity: {
+            "@type": "Person",
+            name: "Samir Liaquat",
+            jobTitle: "Ecommerce Growth Strategist",
+          },
+        }
+      : {}),
+  });
+  const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(desc)}"><meta name="robots" content="${live && !["404", "apply", "thank-you", "case-studies"].includes(slug) ? "index,follow" : "noindex,follow"}"><link rel="canonical" href="${origin + path}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:image" content="${origin}/assets/share.png"><script type="application/ld+json">${schema}</script><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/style.css"><script defer src="/script.js"></script></head><body><a href="#main" class="skip">Skip to content</a>${nav}<main id="main">${body}</main>${footer}</body></html>`;
+  await writeFile("dist/" + (slug || "index") + ".html", html);
+}
+await writeFile(
+  "dist/sitemap.xml",
+  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' +
+    ["", "process", "about", "privacy", "terms"]
+      .map((x) => "<url><loc>" + origin + "/" + x + "</loc></url>")
+      .join("") +
+    "</urlset>",
+);
+await writeFile(
+  "dist/robots.txt",
+  "User-agent: *\nDisallow: " +
+    (live ? "/api/" : "/") +
+    "\nSitemap: " +
+    origin +
+    "/sitemap.xml\n",
+);

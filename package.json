@@ -1,0 +1,10 @@
+{
+  "name": "samir-growth-sprint",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "dev": "node scripts/preview.js",
+    "test": "node --test"
+  }
+}
