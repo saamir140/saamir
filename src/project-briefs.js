@@ -1,93 +1,123 @@
-// Public summaries use sector descriptions and omit client identities, private assets
-// and performance figures. Each entry describes a workstream, not a unique client.
+// Keep screenshot readings distinct from Samir’s own sales and campaign reports.
 export const projectBriefs = [
   {
-    slug: "herbal-product-page",
-    image: "herbal",
-    sector: "Herbal commerce",
-    category: "Growth management",
-    title: "Designing a clearer haircare product page",
-    challenge:
-      "Help a shopper move from an ingredient question to an informed checkout decision.",
-    work: "A 17-section developer brief mapped the product gallery, ingredients, trust information, FAQs, checkout and measurement.",
-    evidence: "Product-page specification",
+    slug: "hair-oil-creative",
+    image: "hair-oil",
+    sector: "Haircare campaign",
+    category: "Acquisition",
+    title: "Hair-oil creative testing",
+    headline: "8.79% CTR (all)",
+    attribution: "Meta Ads screenshot",
+    challenge: "Learn which creative earns attention for a haircare product.",
+    work: "Reviewed the click response alongside ad spend to inform the next creative test.",
+    evidence:
+      "Meta Ads Performance, maximum range. The chart labels run from November 24 to 27.",
+    readings: [
+      ["CTR (all)", "8.79%"],
+      ["Amount spent", "PKR 1,400.68"],
+    ],
     status:
-      "The brief describes the intended experience. Implementation and conversion uplift have not been verified.",
-  },
-  {
-    slug: "saudi-order-flow",
-    image: "orders",
-    sector: "Saudi ecommerce",
-    category: "Growth management",
-    title: "Tracing orders beyond the storefront",
-    challenge:
-      "Understand the order journey as customer conversations moved from a website to messaging.",
-    work: "The project covered the storefront, advertising and order handling. Order entries provided a starting point for tracing the handoff to WhatsApp.",
-    evidence: "Order activity record",
-    status:
-      "Entries document order activity. Payment status, returns, currency and total revenue are unconfirmed.",
+      "CTR (all) includes every type of ad click. This measure describes engagement.",
   },
   {
     slug: "messaging-acquisition",
     image: "messaging",
     sector: "Lead acquisition",
     category: "Acquisition",
-    title: "Generating conversations on a limited budget",
+    title: "Messaging on a limited budget",
+    headline: "124 conversations",
+    attribution: "Meta Ads screenshot",
     challenge:
-      "Use a constrained media budget to start relevant customer conversations.",
-    work: "Messaging campaigns paired creative testing with cost-per-conversation monitoring. The review distinguished an initiated conversation from a completed purchase.",
-    evidence: "Campaign reporting",
+      "Start relevant customer conversations on a tightly controlled budget.",
+    work: "Tracked conversations and their cost while testing messaging creative. Samir separately reports PKR 25,000 in sales for this project.",
+    evidence:
+      "Meta Ads, maximum range. The headline counts messaging conversations started.",
+    readings: [
+      ["Conversations started", "124"],
+      ["Cost per conversation", "PKR 34.52"],
+      ["Amount spent", "PKR 4,281.02"],
+      ["Reach", "18,477"],
+      ["Impressions", "22,069"],
+    ],
     status:
-      "The campaign record covers messaging activity. Sales attribution has not been established.",
+      "The dashboard supports the messaging figures. PKR 25,000 in sales is Samir’s report; transaction records and campaign attribution are unavailable.",
   },
   {
-    slug: "direct-channel-strategy",
-    image: "market",
-    sector: "Premium fashion",
-    category: "Brand launch",
-    title: "Planning a new direct sales channel",
+    slug: "saudi-order-flow",
+    image: "orders",
+    sector: "Saudi ecommerce",
+    category: "Growth management",
+    title: "Saudi ecommerce order operations",
+    headline: "Rs 10 lakh in sales",
+    attribution: "Reported by Samir",
     challenge:
-      "Introduce a direct-to-customer channel while maintaining the brand’s marketplace presence.",
-    work: "A 90-day proposal set out a focused product assortment, premium positioning, test budgets and decision points tied to economics and fulfillment.",
-    evidence: "Market-entry proposal",
+      "Connect the storefront, paid acquisition and order handling for a Saudi-market brand.",
+    work: "Samir worked on the website, advertising and order flow, including the handoff to WhatsApp. He reports one million rupees in sales.",
+    evidence:
+      "Two supplied order-sheet views show dated entries and the order-management workflow. The laptop view is labeled as a test-orders template.",
+    readings: [
+      ["Mobile order sheet", "Dated order entries"],
+      ["Laptop sheet", "Order tracking template"],
+    ],
     status:
-      "A strategy deliverable. The planned budgets and sales scenarios are projections.",
-  },
-  {
-    slug: "clothing-label-launch",
-    image: "fashion-launch",
-    sector: "Apparel ecommerce",
-    category: "Brand launch",
-    title: "Preparing a clothing label for launch",
-    challenge:
-      "Translate an emerging label’s identity into a coherent shopping experience.",
-    work: "The launch work covered naming, visual direction, storefront and product pages, alongside creative and marketing preparation.",
-    evidence: "Storefront and launch preparation",
-    status:
-      "The project records describe launch preparation. Post-launch sales results are unavailable.",
-  },
-  {
-    slug: "hair-oil-creative",
-    image: "hair-oil",
-    sector: "Haircare acquisition",
-    category: "Acquisition",
-    title: "Testing attention for a hair-oil product",
-    challenge: "Understand which creative draws attention to a haircare offer.",
-    work: "The campaign review looked at ad creative and audience response. Its engagement measure included all clicks, so a product-page visit could not be inferred from every interaction.",
-    evidence: "Ad engagement report",
-    status:
-      "The evidence concerns attention to the ad. Purchase and sales outcomes are unverified.",
+      "The sheets document order activity, including test entries. They do not establish a paid sales total, returns or a reporting period for the reported revenue.",
   },
   {
     slug: "fashion-advertising",
     image: "fashion-ads",
     sector: "Women’s fashion",
     category: "Acquisition",
-    title: "Exploring creative for fashion shoppers",
+    title: "Vibes Flow fashion advertising",
+    headline: "12% CTR",
+    attribution: "Reported by Samir",
+    challenge: "Reach fashion shoppers with product-led creative.",
+    work: "Samir worked on advertising and creative for a women’s fashion brand and reports a 12% click-through rate.",
+    evidence: "Samir’s campaign account and project brief.",
+    status:
+      "The reporting window and click definition are unconfirmed. The hair-oil screenshot belongs to a separate workstream.",
+  },
+  {
+    slug: "clothing-label-launch",
+    image: "fashion-launch",
+    sector: "Pakistan apparel",
+    category: "Brand launch",
+    title: "Diyar-e-Libas",
+    headline: "Preparing for launch",
+    attribution: "Pakistan · Brand launch",
     challenge:
-      "Present fashion products in advertising that resonates with the intended shopper.",
-    work: "The project account describes women’s fashion advertising and creative work. The original campaign screenshot and definition of the reported click metric are unavailable.",
-    evidence: "Strategist’s project account",
-    status: "Scope is owner-reported. No performance figure is published.",
+      "Build a recognizable identity and shopping experience for a Pakistani clothing label.",
+    work: "Samir is preparing the launch, covering naming, brand direction, storefront, product pages and launch creative.",
+    evidence: "Launch brief, storefront and Samir’s project update.",
+    status: "Pre-launch engagement. Commercial results will follow the launch.",
+  },
+  {
+    slug: "direct-channel-strategy",
+    image: "market",
+    sector: "Premium fashion",
+    category: "Brand launch",
+    title: "Rang-e-Meraas",
+    headline: "Pakistan market entry",
+    attribution: "Launch in preparation",
+    challenge:
+      "Build a direct sales channel for Pakistan alongside the brand’s marketplace presence.",
+    work: "The owners, who operate multiple brands internationally, approached Samir to lead the Pakistan launch. His 90-day proposal covers a focused product assortment, positioning, unit economics and launch testing.",
+    evidence: "Market-entry proposal and Samir’s project update.",
+    status:
+      "Launch planning is underway. The proposal’s budgets and forecasts describe planned work.",
+  },
+  {
+    slug: "herbal-product-page",
+    image: "herbal",
+    sector: "Herbal commerce",
+    category: "Growth management",
+    title: "Haircare product-page strategy",
+    headline: "17-section page brief",
+    attribution: "Developer specification",
+    challenge:
+      "Help a shopper move from an ingredient question to an informed checkout decision.",
+    work: "A 17-section developer brief mapped the product gallery, ingredients, trust information, FAQs, checkout and measurement.",
+    evidence: "Product-page specification.",
+    status:
+      "The brief documents the design and implementation scope. Conversion uplift has not been measured.",
   },
 ];
