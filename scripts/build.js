@@ -222,7 +222,7 @@ function field([key, name, rule], i) {
       : `<input ${attr} type="${key === "email" ? "email" : key === "store_url" ? "url" : "text"}" maxlength="${rule}" ${key === "full_name" ? 'minlength="2" autocomplete="name"' : key === "email" ? 'autocomplete="email"' : key === "store_url" ? 'placeholder="https://"' : ""}>`;
   return `<div class="field ${key === "goal" ? "wide" : ""}"><label for="${key}">${name}</label>${control}<small id="err-${key}"></small></div>`;
 }
-const form = `${process.env.INTAKE_ENABLED === "true" ? "" : '<p class="preview-note">Preview mode. Applications are closed while the review inbox and privacy details are finalized.</p>'}<form id="lead" action="/api/leads" method="post"><p id="status" role="alert" tabindex="-1"></p><fieldset><legend>Your store</legend><div class="fields">${fields.slice(0, 10).map(field).join("")}</div></fieldset><details><summary>Commercial context (optional)</summary><div class="fields">${fields
+const form = `${process.env.INTAKE_ENABLED === "true" ? "" : '<p class="preview-note">Growth Audit applications are currently closed.</p>'}<form id="lead" action="/api/leads" method="post"><p id="status" role="alert" tabindex="-1"></p><fieldset><legend>Your store</legend><div class="fields">${fields.slice(0, 10).map(field).join("")}</div></fieldset><details><summary>Commercial context (optional)</summary><div class="fields">${fields
   .slice(10)
   .map((x, i) => field(x, i + 10))
   .join(
@@ -267,7 +267,9 @@ const pages = {
     inner(
       "Work with Samir",
       "Apply for a Growth Audit.",
-      "<p>The application is free. Share your business context so I can review fit and suggest a next step. Please leave out passwords and customer information.</p>" +
+      process.env.VERCEL_ENV === "production" && process.env.INTAKE_ENABLED !== "true"
+        ? '<p>Growth Audit applications are currently closed.</p><a class="textlink" href="/#sprint">Explore the 45-Day Plan</a>'
+        : "<p>The application is free. Share your business context so I can review fit and suggest a next step. Please leave out passwords and customer information.</p>" +
         form,
     ),
   ],
