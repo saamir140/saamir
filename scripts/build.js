@@ -36,7 +36,7 @@ const funnelCard = (id, content) =>
   `<section id="${id}" class="funnel-card">${content}</section>`;
 const hero = funnelCard(
   "home",
-  `<div class="funnel-opening"><div>${label("45-Day Ecommerce Growth Sprint")}<h1>Find where your store loses buyers.</h1><p>I’m Samir Liaquat. I audit the journey from ad to checkout, fix the priority friction points with you, and test what changes.</p><div class="actions"><a class="button" href="#offer" data-place="hero">See the $500 sprint</a><a class="textlink" href="#work">Client results</a></div></div>${portrait}</div>`,
+  `<div class="funnel-opening"><div>${label("45-Day Ecommerce Growth Sprint")}<h1>Find where your store loses buyers.</h1><p>I’m Samir Liaquat. I audit the journey from ad to checkout, fix the priority friction points with you, and test what changes.</p><div class="actions"><a class="button" href="#offer" data-place="hero">See the $500 sprint</a><a class="textlink signal-link" href="#work">Client results</a></div></div>${portrait}</div>`,
 );
 const pain = funnelCard(
   "problems",
@@ -97,7 +97,7 @@ const campaignMetrics = featuredCampaign.readings
   .join("");
 const selected = funnelCard(
   "work",
-  `${label("Client results")}<h2>Turning ad spend into conversations</h2><p>A lead-generation project with a tightly controlled budget. These figures come from the campaign dashboard.</p><dl class="funnel-metrics">${campaignMetrics}</dl><p class="evidence-note">Samir separately reports PKR 25,000 in sales. The dashboard records messaging activity.</p><details class="additional-results"><summary>More results &amp; brand launches</summary>${workCards()}</details><a class="textlink" href="/case-studies">Read all seven project briefs</a>${testimonials
+  `${label("Client results")}<h2>Turning ad spend into conversations</h2><p>A lead-generation project with a tightly controlled budget. These figures come from the campaign dashboard.</p><dl class="funnel-metrics">${campaignMetrics}</dl><p class="evidence-note">Samir separately reports PKR 25,000 in sales. The dashboard records messaging activity.</p><details class="additional-results"><summary>More results &amp; brand launches</summary>${workCards()}</details><a class="textlink signal-link" href="/case-studies">Read all seven project briefs</a>${testimonials
     .filter((x) => x.publicationApproved && x.consentApproved)
     .map(
       (x) =>
@@ -156,7 +156,7 @@ const deliverables = section(
 );
 const homeSprint = funnelCard(
   "sprint",
-  `<h2>Your 45-day plan</h2><div class="weekly-list">${weeklyPlan.map(([week, days, title, action, output]) => `<details class="week"><summary><span class="week-date">${week}<small>Days ${days}</small></span><span>${title}</span></summary><div class="week-notes"><p>${action}</p><p class="pain-output"><b>You get</b> ${output}</p></div></details>`).join("")}</div><a class="textlink" href="/process">Explore my method</a>`,
+  `<h2>Your 45-day plan</h2><div class="weekly-list">${weeklyPlan.map(([week, days, title, action, output]) => `<details class="week"><summary><span class="week-date">${week}<small>Days ${days}</small></span><span>${title}</span></summary><div class="week-notes"><p>${action}</p><p class="pain-output"><b>You get</b> ${output}</p></div></details>`).join("")}</div><a class="textlink signal-link" href="/process">Explore my method</a>`,
 );
 const intakeOpen = process.env.INTAKE_ENABLED === "true";
 const packageCard = funnelCard(
@@ -174,7 +174,7 @@ const packageCard = funnelCard(
   <p class="fee-note">Ad spend, paid tools and outside production are separate.</p>
   <div class="offer-action"${intakeOpen ? "" : ' id="application"'}>
   ${intakeOpen ? "" : "<p>Applications are currently closed.</p>"}
-  <a class="button" href="/apply" data-place="offer">${intakeOpen ? "Apply for the sprint" : "View application status"}</a></div>`,
+  <a class="button signal-cta" href="/apply" data-place="offer">${intakeOpen ? "Apply for the sprint" : "View application status"}</a></div>`,
 );
 const faq = section(
   "faq",
